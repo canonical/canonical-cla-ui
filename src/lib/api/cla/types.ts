@@ -4,612 +4,612 @@
  */
 
 export interface paths {
-    "/metrics": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Metrics
-         * @description Endpoint that serves Prometheus metrics.
-         */
-        get: operations["metrics_metrics_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cla/check": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Check CLA
-         * @description Checks if one or multiple contributors have signed the CLA.
-         */
-        get: operations["check_cla_cla_check_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cla/individual/sign": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Sign Individual CLA
-         * @description Signs the CLA as an individual contributor.
-         *
-         *     __Note:__
-         *     The user must have a valid `github_oauth2_session` and `launchpad_oauth_session` cookie sessions in order to verify their email addresses.
-         */
-        post: operations["sign_cla_individual_cla_individual_sign_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cla/organization/sign": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Sign Organization CLA
-         * @description Signs the CLA as an organization, representing a group of contributors.
-         *
-         *     CLA check is based on the provided email domain, where a contributor
-         *     GitHub or Launchpad email must match the email domain.
-         */
-        post: operations["sign_cla_organization_cla_organization_sign_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/github/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Github Login
-         * @description Redirects to GitHub OAuth login page.
-         */
-        get: operations["github_login_github_login_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/github/callback": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Github Callback
-         * @description Handles the GitHub OAuth callback.
-         */
-        get: operations["github_callback_github_callback_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/github/profile": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Github Profile
-         * @description Retrieves the GitHub profile of the authenticated user.
-         */
-        get: operations["github_profile_github_profile_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/github/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Github Logout
-         * @description Clears the GitHub session cookie.
-         */
-        get: operations["github_logout_github_logout_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/github/webhook": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Webhook
-         * @description Handles GitHub webhooks.
-         *
-         *     This endpoint should be used as the webhook URL when creating a GitHub App.
-         *     The GitHub App must have the following permissions:
-         *     - **Pull Requests**: `Read-only`
-         *     - **Contents**: `Read-only` (required for private repositories)
-         *     - **Checks**: `Read & write`
-         *
-         *     And be subscribed to the following events:
-         *     - `Pull request`
-         *     - `Check run`
-         */
-        post: operations["webhook_github_webhook_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/launchpad/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Launchpad Login
-         * @description Redirects to Launchpad OAuth login page.
-         */
-        get: operations["launchpad_login_launchpad_login_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/launchpad/callback": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Launchpad Callback
-         * @description Handles the Launchpad OAuth callback.
-         */
-        get: operations["launchpad_callback_launchpad_callback_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/launchpad/profile": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Launchpad Profile
-         * @description Retrieves the Launchpad profile of the authenticated user.
-         */
-        get: operations["launchpad_profile_launchpad_profile_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/launchpad/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Launchpad Logout
-         * @description Clears the Launchpad session cookie.
-         */
-        get: operations["launchpad_logout_launchpad_logout_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/oidc/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Login to Canonical OIDC
-         * @description Redirects to Canonical OIDC login page.
-         */
-        get: operations["oidc_login_oidc_login_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/oidc/callback": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Callback from Canonical OIDC
-         * @description Handles the Canonical OIDC callback.
-         */
-        get: operations["oidc_callback_oidc_callback_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/oidc/profile": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Profile from Canonical OIDC
-         * @description Retrieves the OIDC profile of the authenticated user.
-         */
-        get: operations["oidc_profile_oidc_profile_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/oidc/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Logout from Canonical OIDC
-         * @description Clears the OIDC session cookie.
-         */
-        get: operations["oidc_logout_oidc_logout_get"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
+	'/metrics': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Metrics
+		 * @description Endpoint that serves Prometheus metrics.
+		 */
+		get: operations['metrics_metrics_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/cla/check': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Check CLA
+		 * @description Checks if one or multiple contributors have signed the CLA.
+		 */
+		get: operations['check_cla_cla_check_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/cla/individual/sign': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Sign Individual CLA
+		 * @description Signs the CLA as an individual contributor.
+		 *
+		 *     __Note:__
+		 *     The user must have a valid `github_oauth2_session` and `launchpad_oauth_session` cookie sessions in order to verify their email addresses.
+		 */
+		post: operations['sign_cla_individual_cla_individual_sign_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/cla/organization/sign': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Sign Organization CLA
+		 * @description Signs the CLA as an organization, representing a group of contributors.
+		 *
+		 *     CLA check is based on the provided email domain, where a contributor
+		 *     GitHub or Launchpad email must match the email domain.
+		 */
+		post: operations['sign_cla_organization_cla_organization_sign_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/github/login': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Github Login
+		 * @description Redirects to GitHub OAuth login page.
+		 */
+		get: operations['github_login_github_login_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/github/callback': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Github Callback
+		 * @description Handles the GitHub OAuth callback.
+		 */
+		get: operations['github_callback_github_callback_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/github/profile': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Github Profile
+		 * @description Retrieves the GitHub profile of the authenticated user.
+		 */
+		get: operations['github_profile_github_profile_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/github/logout': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Github Logout
+		 * @description Clears the GitHub session cookie.
+		 */
+		get: operations['github_logout_github_logout_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/github/webhook': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Webhook
+		 * @description Handles GitHub webhooks.
+		 *
+		 *     This endpoint should be used as the webhook URL when creating a GitHub App.
+		 *     The GitHub App must have the following permissions:
+		 *     - **Pull Requests**: `Read-only`
+		 *     - **Contents**: `Read-only` (required for private repositories)
+		 *     - **Checks**: `Read & write`
+		 *
+		 *     And be subscribed to the following events:
+		 *     - `Pull request`
+		 *     - `Check run`
+		 */
+		post: operations['webhook_github_webhook_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/launchpad/login': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Launchpad Login
+		 * @description Redirects to Launchpad OAuth login page.
+		 */
+		get: operations['launchpad_login_launchpad_login_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/launchpad/callback': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Launchpad Callback
+		 * @description Handles the Launchpad OAuth callback.
+		 */
+		get: operations['launchpad_callback_launchpad_callback_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/launchpad/profile': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Launchpad Profile
+		 * @description Retrieves the Launchpad profile of the authenticated user.
+		 */
+		get: operations['launchpad_profile_launchpad_profile_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/launchpad/logout': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Launchpad Logout
+		 * @description Clears the Launchpad session cookie.
+		 */
+		get: operations['launchpad_logout_launchpad_logout_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/oidc/login': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Login to Canonical OIDC
+		 * @description Redirects to Canonical OIDC login page.
+		 */
+		get: operations['oidc_login_oidc_login_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/oidc/callback': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Callback from Canonical OIDC
+		 * @description Handles the Canonical OIDC callback.
+		 */
+		get: operations['oidc_callback_oidc_callback_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/oidc/profile': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Profile from Canonical OIDC
+		 * @description Retrieves the OIDC profile of the authenticated user.
+		 */
+		get: operations['oidc_profile_oidc_profile_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/oidc/logout': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Logout from Canonical OIDC
+		 * @description Clears the OIDC session cookie.
+		 */
+		get: operations['oidc_logout_oidc_logout_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        /**
-         * CLACheckResponse
-         * @example {
-         *       "emails": {
-         *         "dev1@ubuntu.com": true,
-         *         "dev2@example.com": false
-         *       },
-         *       "github_usernames": {
-         *         "dev1": true,
-         *         "dev2": false
-         *       },
-         *       "launchpad_usernames": {
-         *         "dev1": true,
-         *         "dev2": false
-         *       }
-         *     }
-         */
-        CLACheckResponse: {
-            /** Emails */
-            emails: {
-                [key: string]: boolean;
-            };
-            /** Github Usernames */
-            github_usernames: {
-                [key: string]: boolean;
-            };
-            /** Launchpad Usernames */
-            launchpad_usernames: {
-                [key: string]: boolean;
-            };
-        };
-        /** ErrorResponse */
-        ErrorResponse: {
-            /** Detail */
-            detail: string;
-        };
-        /**
-         * GitHubProfile
-         * @example {
-         *       "emails": [
-         *         "contact@canonica.com",
-         *         "contact@ubuntu.com"
-         *       ],
-         *       "username": "canonical"
-         *     }
-         */
-        GitHubProfile: {
-            /**
-             * Username
-             * @description GitHub username.
-             */
-            username: string;
-            /**
-             * Emails
-             * @description List of verified email addresses.
-             */
-            emails: string[];
-        };
-        /** HTTPValidationError */
-        HTTPValidationError: {
-            /** Detail */
-            detail?: components["schemas"]["ValidationError"][];
-        };
-        /**
-         * IndividualCreateForm
-         * @example {
-         *       "address": "123 Main St, Springfield, IL 62701",
-         *       "country": "FR",
-         *       "first_name": "John",
-         *       "github_email": "john@example.com",
-         *       "last_name": "Doe"
-         *     }
-         */
-        IndividualCreateForm: {
-            /** First Name */
-            first_name: string;
-            /** Last Name */
-            last_name: string;
-            /** Address */
-            address: string;
-            /**
-             * Country
-             * @description Country in the short name format.
-             */
-            country: string;
-            /** Github Email */
-            github_email?: string | null;
-            /** Launchpad Email */
-            launchpad_email?: string | null;
-        };
-        /** IndividualCreationSuccess */
-        IndividualCreationSuccess: {
-            /**
-             * Message
-             * @default Individual Contributor License Agreement (CLA) signed successfully
-             */
-            message: string;
-        };
-        /**
-         * LaunchpadProfile
-         * @description Launchpad user profile.
-         */
-        LaunchpadProfile: {
-            /**
-             * Username
-             * @description Launchpad username
-             * @example canonical
-             */
-            username: string;
-            /**
-             * Emails
-             * @description List of verified email addresses
-             * @example contact@canonica.com
-             * @example contact@ubuntu.com
-             */
-            emails: string[];
-        };
-        /**
-         * OIDCUserInfo
-         * @description User information from OIDC userinfo endpoint.
-         */
-        OIDCUserInfo: {
-            /**
-             * Sub
-             * @description Subject identifier (unique user ID)
-             * @example 1ee396e6-e522-41f5-b4a4-5480d9543358
-             */
-            sub: string;
-            /**
-             * Email
-             * @description User's email address
-             * @example user@canonical.com
-             */
-            email?: string | null;
-            /**
-             * Email Verified
-             * @description Whether the email is verified
-             * @default false
-             * @example true
-             */
-            email_verified: boolean;
-            /**
-             * Name
-             * @description User's full name
-             * @example John Doe
-             */
-            name?: string | null;
-            /**
-             * Given Name
-             * @description User's given/first name
-             * @example John
-             */
-            given_name?: string | null;
-            /**
-             * Family Name
-             * @description User's family/last name
-             * @example Doe
-             */
-            family_name?: string | null;
-            /**
-             * Preferred Username
-             * @description Preferred username
-             * @example jdoe
-             */
-            preferred_username?: string | null;
-            /**
-             * Picture
-             * @description URL to user's profile picture
-             * @example https://example.com/profile.jpg
-             */
-            picture?: string | null;
-        };
-        /**
-         * OrganizationCreateForm
-         * @example {
-         *       "address": "123 Main St, Springfield, IL 62701",
-         *       "contact_email": "john@acme.com",
-         *       "contact_name": "John Doe",
-         *       "country": "FR",
-         *       "email_domain": "acme.com",
-         *       "name": "ACME Corp",
-         *       "phone_number": "+1234567890"
-         *     }
-         */
-        OrganizationCreateForm: {
-            /** Name */
-            name: string;
-            /** Email Domain */
-            email_domain: string;
-            /** Contact Name */
-            contact_name: string;
-            /** Contact Job Title */
-            contact_job_title: string;
-            /** Contact Email */
-            contact_email: string;
-            /** Phone Number */
-            phone_number?: string | null;
-            /** Address */
-            address?: string | null;
-            /**
-             * Country
-             * @description Country in the short name format.
-             */
-            country: string;
-        };
-        /** OrganizationCreationSuccess */
-        OrganizationCreationSuccess: {
-            /**
-             * Message
-             * @default Organization Contributor License Agreement (CLA) signed successfully
-             */
-            message: string;
-        };
-        /** ValidationError */
-        ValidationError: {
-            /** Location */
-            loc: (string | number)[];
-            /** Message */
-            msg: string;
-            /** Error Type */
-            type: string;
-        };
-        /** Redirection */
-        app__launchpad__routes__Redirection__1: {
-            /**
-             * Location
-             * @constant
-             * @enum {string}
-             */
-            location: "/callback";
-        };
-        /** Redirection */
-        app__launchpad__routes__Redirection__2: {
-            /**
-             * Location
-             * @constant
-             * @enum {string}
-             */
-            location: "/profile";
-        };
-    };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+	schemas: {
+		/**
+		 * CLACheckResponse
+		 * @example {
+		 *       "emails": {
+		 *         "dev1@ubuntu.com": true,
+		 *         "dev2@example.com": false
+		 *       },
+		 *       "github_usernames": {
+		 *         "dev1": true,
+		 *         "dev2": false
+		 *       },
+		 *       "launchpad_usernames": {
+		 *         "dev1": true,
+		 *         "dev2": false
+		 *       }
+		 *     }
+		 */
+		CLACheckResponse: {
+			/** Emails */
+			emails: {
+				[key: string]: boolean;
+			};
+			/** Github Usernames */
+			github_usernames: {
+				[key: string]: boolean;
+			};
+			/** Launchpad Usernames */
+			launchpad_usernames: {
+				[key: string]: boolean;
+			};
+		};
+		/** ErrorResponse */
+		ErrorResponse: {
+			/** Detail */
+			detail: string;
+		};
+		/**
+		 * GitHubProfile
+		 * @example {
+		 *       "emails": [
+		 *         "contact@canonica.com",
+		 *         "contact@ubuntu.com"
+		 *       ],
+		 *       "username": "canonical"
+		 *     }
+		 */
+		GitHubProfile: {
+			/**
+			 * Username
+			 * @description GitHub username.
+			 */
+			username: string;
+			/**
+			 * Emails
+			 * @description List of verified email addresses.
+			 */
+			emails: string[];
+		};
+		/** HTTPValidationError */
+		HTTPValidationError: {
+			/** Detail */
+			detail?: components['schemas']['ValidationError'][];
+		};
+		/**
+		 * IndividualCreateForm
+		 * @example {
+		 *       "address": "123 Main St, Springfield, IL 62701",
+		 *       "country": "FR",
+		 *       "first_name": "John",
+		 *       "github_email": "john@example.com",
+		 *       "last_name": "Doe"
+		 *     }
+		 */
+		IndividualCreateForm: {
+			/** First Name */
+			first_name: string;
+			/** Last Name */
+			last_name: string;
+			/** Address */
+			address: string;
+			/**
+			 * Country
+			 * @description Country in the short name format.
+			 */
+			country: string;
+			/** Github Email */
+			github_email?: string | null;
+			/** Launchpad Email */
+			launchpad_email?: string | null;
+		};
+		/** IndividualCreationSuccess */
+		IndividualCreationSuccess: {
+			/**
+			 * Message
+			 * @default Individual Contributor License Agreement (CLA) signed successfully
+			 */
+			message: string;
+		};
+		/**
+		 * LaunchpadProfile
+		 * @description Launchpad user profile.
+		 */
+		LaunchpadProfile: {
+			/**
+			 * Username
+			 * @description Launchpad username
+			 * @example canonical
+			 */
+			username: string;
+			/**
+			 * Emails
+			 * @description List of verified email addresses
+			 * @example contact@canonica.com
+			 * @example contact@ubuntu.com
+			 */
+			emails: string[];
+		};
+		/**
+		 * OIDCUserInfo
+		 * @description User information from OIDC userinfo endpoint.
+		 */
+		OIDCUserInfo: {
+			/**
+			 * Sub
+			 * @description Subject identifier (unique user ID)
+			 * @example 1ee396e6-e522-41f5-b4a4-5480d9543358
+			 */
+			sub: string;
+			/**
+			 * Email
+			 * @description User's email address
+			 * @example user@canonical.com
+			 */
+			email?: string | null;
+			/**
+			 * Email Verified
+			 * @description Whether the email is verified
+			 * @default false
+			 * @example true
+			 */
+			email_verified: boolean;
+			/**
+			 * Name
+			 * @description User's full name
+			 * @example John Doe
+			 */
+			name?: string | null;
+			/**
+			 * Given Name
+			 * @description User's given/first name
+			 * @example John
+			 */
+			given_name?: string | null;
+			/**
+			 * Family Name
+			 * @description User's family/last name
+			 * @example Doe
+			 */
+			family_name?: string | null;
+			/**
+			 * Preferred Username
+			 * @description Preferred username
+			 * @example jdoe
+			 */
+			preferred_username?: string | null;
+			/**
+			 * Picture
+			 * @description URL to user's profile picture
+			 * @example https://example.com/profile.jpg
+			 */
+			picture?: string | null;
+		};
+		/**
+		 * OrganizationCreateForm
+		 * @example {
+		 *       "address": "123 Main St, Springfield, IL 62701",
+		 *       "contact_email": "john@acme.com",
+		 *       "contact_name": "John Doe",
+		 *       "country": "FR",
+		 *       "email_domain": "acme.com",
+		 *       "name": "ACME Corp",
+		 *       "phone_number": "+1234567890"
+		 *     }
+		 */
+		OrganizationCreateForm: {
+			/** Name */
+			name: string;
+			/** Email Domain */
+			email_domain: string;
+			/** Contact Name */
+			contact_name: string;
+			/** Contact Job Title */
+			contact_job_title: string;
+			/** Contact Email */
+			contact_email: string;
+			/** Phone Number */
+			phone_number?: string | null;
+			/** Address */
+			address?: string | null;
+			/**
+			 * Country
+			 * @description Country in the short name format.
+			 */
+			country: string;
+		};
+		/** OrganizationCreationSuccess */
+		OrganizationCreationSuccess: {
+			/**
+			 * Message
+			 * @default Organization Contributor License Agreement (CLA) signed successfully
+			 */
+			message: string;
+		};
+		/** ValidationError */
+		ValidationError: {
+			/** Location */
+			loc: (string | number)[];
+			/** Message */
+			msg: string;
+			/** Error Type */
+			type: string;
+		};
+		/** Redirection */
+		app__launchpad__routes__Redirection__1: {
+			/**
+			 * Location
+			 * @constant
+			 * @enum {string}
+			 */
+			location: '/callback';
+		};
+		/** Redirection */
+		app__launchpad__routes__Redirection__2: {
+			/**
+			 * Location
+			 * @constant
+			 * @enum {string}
+			 */
+			location: '/profile';
+		};
+	};
+	responses: never;
+	parameters: never;
+	requestBodies: never;
+	headers: never;
+	pathItems: never;
 }
 export type ClaCheckResponse = components['schemas']['CLACheckResponse'];
 export type ErrorResponse = components['schemas']['ErrorResponse'];
@@ -622,599 +622,601 @@ export type OidcUserInfo = components['schemas']['OIDCUserInfo'];
 export type OrganizationCreateForm = components['schemas']['OrganizationCreateForm'];
 export type OrganizationCreationSuccess = components['schemas']['OrganizationCreationSuccess'];
 export type ValidationError = components['schemas']['ValidationError'];
-export type AppLaunchpadRoutesRedirection_1 = components['schemas']['app__launchpad__routes__Redirection__1'];
-export type AppLaunchpadRoutesRedirection_2 = components['schemas']['app__launchpad__routes__Redirection__2'];
+export type AppLaunchpadRoutesRedirection_1 =
+	components['schemas']['app__launchpad__routes__Redirection__1'];
+export type AppLaunchpadRoutesRedirection_2 =
+	components['schemas']['app__launchpad__routes__Redirection__2'];
 export type $defs = Record<string, never>;
 export interface operations {
-    metrics_metrics_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-        };
-    };
-    check_cla_cla_check_get: {
-        parameters: {
-            query?: {
-                /** @description A list of emails to check for CLA signatories */
-                emails?: string[] | null;
-                /** @description A list of GitHub usernames to check for CLA signatories */
-                github_usernames?: string[] | null;
-                /** @description A list of Launchpad usernames to check for CLA signatories */
-                launchpad_usernames?: string[] | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CLACheckResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    sign_cla_individual_cla_individual_sign_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["IndividualCreateForm"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["IndividualCreationSuccess"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    sign_cla_organization_cla_organization_sign_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["OrganizationCreateForm"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OrganizationCreationSuccess"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    github_login_github_login_get: {
-        parameters: {
-            query?: {
-                /** @description The URL to redirect to after successful login (base64 encoded). */
-                redirect_url?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            307: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    github_callback_github_callback_get: {
-        parameters: {
-            query?: {
-                /** @description The OAuth code returned by GitHub. */
-                code?: string | null;
-                /** @description A security check state. */
-                state?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            307: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    github_profile_github_profile_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GitHubProfile"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-        };
-    };
-    github_logout_github_logout_get: {
-        parameters: {
-            query?: {
-                /** @description The URL to redirect to after successful logout (base64 encoded). */
-                redirect_url?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    webhook_github_webhook_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Forbidden */
-            403: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-        };
-    };
-    launchpad_login_launchpad_login_get: {
-        parameters: {
-            query?: {
-                /** @description The URL to redirect to after successful login (base64 encoded). */
-                redirect_url?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            307: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["app__launchpad__routes__Redirection__1"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    launchpad_callback_launchpad_callback_get: {
-        parameters: {
-            query: {
-                /** @description The OAuth state returned by Launchpad. */
-                state: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            307: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["app__launchpad__routes__Redirection__2"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    launchpad_profile_launchpad_profile_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["LaunchpadProfile"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-        };
-    };
-    launchpad_logout_launchpad_logout_get: {
-        parameters: {
-            query?: {
-                /** @description The URL to redirect to after successful logout (base64 encoded). */
-                redirect_url?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    oidc_login_oidc_login_get: {
-        parameters: {
-            query?: {
-                /** @description The redirect URI to redirect to after login. */
-                redirect_uri?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            307: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    oidc_callback_oidc_callback_get: {
-        parameters: {
-            query?: {
-                code?: string | null;
-                state?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            307: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Bad Request */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    oidc_profile_oidc_profile_get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OIDCUserInfo"];
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-            /** @description Service Unavailable */
-            503: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ErrorResponse"];
-                };
-            };
-        };
-    };
-    oidc_logout_oidc_logout_get: {
-        parameters: {
-            query?: {
-                /** @description The redirect URI to redirect to after logout. */
-                redirect_uri?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
+	metrics_metrics_get: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+		};
+	};
+	check_cla_cla_check_get: {
+		parameters: {
+			query?: {
+				/** @description A list of emails to check for CLA signatories */
+				emails?: string[] | null;
+				/** @description A list of GitHub usernames to check for CLA signatories */
+				github_usernames?: string[] | null;
+				/** @description A list of Launchpad usernames to check for CLA signatories */
+				launchpad_usernames?: string[] | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['CLACheckResponse'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	sign_cla_individual_cla_individual_sign_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['IndividualCreateForm'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['IndividualCreationSuccess'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	sign_cla_organization_cla_organization_sign_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['OrganizationCreateForm'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			201: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['OrganizationCreationSuccess'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	github_login_github_login_get: {
+		parameters: {
+			query?: {
+				/** @description The URL to redirect to after successful login (base64 encoded). */
+				redirect_url?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			307: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	github_callback_github_callback_get: {
+		parameters: {
+			query?: {
+				/** @description The OAuth code returned by GitHub. */
+				code?: string | null;
+				/** @description A security check state. */
+				state?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			307: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	github_profile_github_profile_get: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['GitHubProfile'];
+				};
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+		};
+	};
+	github_logout_github_logout_get: {
+		parameters: {
+			query?: {
+				/** @description The URL to redirect to after successful logout (base64 encoded). */
+				redirect_url?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	webhook_github_webhook_post: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+			/** @description Forbidden */
+			403: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+		};
+	};
+	launchpad_login_launchpad_login_get: {
+		parameters: {
+			query?: {
+				/** @description The URL to redirect to after successful login (base64 encoded). */
+				redirect_url?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			307: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['app__launchpad__routes__Redirection__1'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	launchpad_callback_launchpad_callback_get: {
+		parameters: {
+			query: {
+				/** @description The OAuth state returned by Launchpad. */
+				state: string;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			307: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['app__launchpad__routes__Redirection__2'];
+				};
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	launchpad_profile_launchpad_profile_get: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['LaunchpadProfile'];
+				};
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+		};
+	};
+	launchpad_logout_launchpad_logout_get: {
+		parameters: {
+			query?: {
+				/** @description The URL to redirect to after successful logout (base64 encoded). */
+				redirect_url?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	oidc_login_oidc_login_get: {
+		parameters: {
+			query?: {
+				/** @description The redirect URI to redirect to after login. */
+				redirect_uri?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			307: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	oidc_callback_oidc_callback_get: {
+		parameters: {
+			query?: {
+				code?: string | null;
+				state?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			307: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Bad Request */
+			400: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	oidc_profile_oidc_profile_get: {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['OIDCUserInfo'];
+				};
+			};
+			/** @description Unauthorized */
+			401: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+			/** @description Service Unavailable */
+			503: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ErrorResponse'];
+				};
+			};
+		};
+	};
+	oidc_logout_oidc_logout_get: {
+		parameters: {
+			query?: {
+				/** @description The redirect URI to redirect to after logout. */
+				redirect_uri?: string | null;
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
 }

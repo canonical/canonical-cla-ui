@@ -8,7 +8,7 @@ A Svelte 5 application for managing and signing **Contributor License Agreements
 
 ### Prerequisites
 
-* [Bun](https://bun.sh/) installed.
+- [Bun](https://bun.sh/) installed.
 
 ### Installation
 
@@ -32,8 +32,8 @@ bun run dev
 
 The project uses `openapi-typescript` to maintain a type-safe interface with the CLA backend.
 
-* **Update Schema**: Fetch the latest `openapi.json` from production.
-* **Generate Types**: Re-generate TypeScript interfaces from the local schema.
+- **Update Schema**: Fetch the latest `openapi.json` from production.
+- **Generate Types**: Re-generate TypeScript interfaces from the local schema.
 
 ```sh
 # Run both steps
@@ -108,11 +108,11 @@ The app uses `@sveltejs/adapter-auto`. For specific environments (e.g., Docker, 
 
 ## 📂 Project Structure
 
-* `src/lib/api/`: API clients and generated OpenAPI types.
-* `src/routes/`: SvelteKit pages and layouts.
-* `.api-spec/`: Storage for the `cla.json` OpenAPI definition.
-* `e2e/`: Playwright end-to-end tests.
-* `scripts/`: Utility shell scripts (e.g., schema updates).
+- `src/lib/api/`: API clients and generated OpenAPI types.
+- `src/routes/`: SvelteKit pages and layouts.
+- `.api-spec/`: Storage for the `cla.json` OpenAPI definition.
+- `e2e/`: Playwright end-to-end tests.
+- `scripts/`: Utility shell scripts (e.g., schema updates).
 
 ---
 
