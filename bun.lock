@@ -5,6 +5,7 @@
     "": {
       "name": "canonical-cla-ui",
       "dependencies": {
+        "@canonical/svelte-icons": "^0.0.9",
         "openapi-fetch": "^0.15.0",
       },
       "devDependencies": {
@@ -61,6 +62,8 @@
     "@babel/types": ["@babel/types@7.29.0", "", { "dependencies": { "@babel/helper-string-parser": "^7.27.1", "@babel/helper-validator-identifier": "^7.28.5" } }, "sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A=="],
 
     "@bcoe/v8-coverage": ["@bcoe/v8-coverage@1.0.2", "", {}, "sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA=="],
+
+    "@canonical/svelte-icons": ["@canonical/svelte-icons@0.0.9", "", { "peerDependencies": { "svelte": "^5.0.0" } }, "sha512-gZqkM1oxYTe0QWGZt9dxvrVLLhjKI7Q41BCd2MzhdsF7XCBS9cMTUZOSnPe/U60GdciF8zbVLw8eCTRXclSgHw=="],
 
     "@chromatic-com/storybook": ["@chromatic-com/storybook@5.0.0", "", { "dependencies": { "@neoconfetti/react": "^1.0.0", "chromatic": "^13.3.4", "filesize": "^10.0.12", "jsonfile": "^6.1.0", "strip-ansi": "^7.1.0" }, "peerDependencies": { "storybook": "^0.0.0-0 || ^10.1.0 || ^10.1.0-0 || ^10.2.0-0 || ^10.3.0-0" } }, "sha512-8wUsqL8kg6R5ue8XNE7Jv/iD1SuE4+6EXMIGIuE+T2loBITEACLfC3V8W44NJviCLusZRMWbzICddz0nU0bFaw=="],
 
