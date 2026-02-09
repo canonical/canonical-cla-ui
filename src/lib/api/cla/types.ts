@@ -90,6 +90,86 @@ export interface paths {
 		patch?: never;
 		trace?: never;
 	};
+	'/cla/exclude-project': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		/**
+		 * Exclude Project
+		 * @description Exclude a project from the CLA check.
+		 */
+		post: operations['exclude_project_cla_exclude_project_post'];
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/cla/excluded-projects': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * Projects Excluded
+		 * @description Check if a project is excluded from the CLA check.
+		 */
+		get: operations['projects_excluded_cla_excluded_projects_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/cla/list-excluded-projects': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		/**
+		 * List Excluded Projects
+		 * @description List all excluded projects.
+		 */
+		get: operations['list_excluded_projects_cla_list_excluded_projects_get'];
+		put?: never;
+		post?: never;
+		delete?: never;
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
+	'/cla/excluded-project': {
+		parameters: {
+			query?: never;
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		get?: never;
+		put?: never;
+		post?: never;
+		/**
+		 * Remote Excluded Project
+		 * @description Remove an excluded project from the CLA check.
+		 */
+		delete: operations['remote_excluded_project_cla_excluded_project_delete'];
+		options?: never;
+		head?: never;
+		patch?: never;
+		trace?: never;
+	};
 	'/github/login': {
 		parameters: {
 			query?: never;
@@ -400,6 +480,43 @@ export interface components {
 			/** Detail */
 			detail: string;
 		};
+		/** ExcludedProjectCreatePayload */
+		ExcludedProjectCreatePayload: {
+			/** @description The platform of the project */
+			platform: components['schemas']['ProjectPlatform'];
+			/**
+			 * Full Name
+			 * @description The full name of the project, this include the organization name and the project name.
+			 * @example canonical/ubuntu.com
+			 */
+			full_name: string;
+		};
+		/** ExcludedProjectListingPayload */
+		ExcludedProjectListingPayload: {
+			/** Projects */
+			projects: components['schemas']['ExcludedProjectPayload'][];
+			/** Supported Platforms */
+			supported_platforms: components['schemas']['ProjectPlatform'][];
+			/** Total */
+			total: number;
+		};
+		/** ExcludedProjectPayload */
+		ExcludedProjectPayload: {
+			/** @description The platform of the project */
+			platform: components['schemas']['ProjectPlatform'];
+			/**
+			 * Full Name
+			 * @description The full name of the project, this include the organization name and the project name.
+			 * @example canonical/ubuntu.com
+			 */
+			full_name: string;
+		};
+		/** ExcludedProjectsResponse */
+		ExcludedProjectsResponse: {
+			project: components['schemas']['ExcludedProjectPayload'];
+			/** Excluded */
+			excluded: boolean;
+		};
 		/**
 		 * GitHubProfile
 		 * @example {
@@ -587,11 +704,16 @@ export interface components {
 			message: string;
 		};
 		/**
+		 * ProjectPlatform
+		 * @enum {string}
+		 */
+		ProjectPlatform: ProjectPlatform;
+		/**
 		 * Role
 		 * @description Role of an OIDC user.
 		 * @enum {string}
 		 */
-		Role: 'admin' | 'community_manager' | 'legal_counsel';
+		Role: Role;
 		/** ValidationError */
 		ValidationError: {
 			/** Location */
@@ -628,6 +750,10 @@ export interface components {
 }
 export type ClaCheckResponse = components['schemas']['CLACheckResponse'];
 export type ErrorResponse = components['schemas']['ErrorResponse'];
+export type ExcludedProjectCreatePayload = components['schemas']['ExcludedProjectCreatePayload'];
+export type ExcludedProjectListingPayload = components['schemas']['ExcludedProjectListingPayload'];
+export type ExcludedProjectPayload = components['schemas']['ExcludedProjectPayload'];
+export type ExcludedProjectsResponse = components['schemas']['ExcludedProjectsResponse'];
 export type GitHubProfile = components['schemas']['GitHubProfile'];
 export type HttpValidationError = components['schemas']['HTTPValidationError'];
 export type IndividualCreateForm = components['schemas']['IndividualCreateForm'];
@@ -637,7 +763,6 @@ export type OidcProfile = components['schemas']['OIDCProfile'];
 export type OidcUserInfo = components['schemas']['OIDCUserInfo'];
 export type OrganizationCreateForm = components['schemas']['OrganizationCreateForm'];
 export type OrganizationCreationSuccess = components['schemas']['OrganizationCreationSuccess'];
-export type Role = components['schemas']['Role'];
 export type ValidationError = components['schemas']['ValidationError'];
 export type AppLaunchpadRoutesRedirection_1 =
 	components['schemas']['app__launchpad__routes__Redirection__1'];
@@ -754,6 +879,150 @@ export interface operations {
 				};
 				content: {
 					'application/json': components['schemas']['OrganizationCreationSuccess'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	exclude_project_cla_exclude_project_post: {
+		parameters: {
+			query?: never;
+			header: {
+				'X-Internal-Secret': string;
+			};
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['ExcludedProjectCreatePayload'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	projects_excluded_cla_excluded_projects_get: {
+		parameters: {
+			query?: {
+				/** @description A list of projects to check for CLA signatories */
+				projects?: string[];
+			};
+			header?: never;
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ExcludedProjectsResponse'][];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	list_excluded_projects_cla_list_excluded_projects_get: {
+		parameters: {
+			query?: {
+				/** @description The maximum number of projects to return */
+				limit?: number;
+				/** @description The number of projects to skip */
+				offset?: number;
+				/** @description Whether to sort the projects in descending order */
+				descending?: boolean | null;
+				/** @description The query to search for projects */
+				query?: string | null;
+				/** @description The platform to filter by */
+				platform?: components['schemas']['ProjectPlatform'] | null;
+			};
+			header: {
+				'X-Internal-Secret': string;
+			};
+			path?: never;
+			cookie?: never;
+		};
+		requestBody?: never;
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['ExcludedProjectListingPayload'];
+				};
+			};
+			/** @description Validation Error */
+			422: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': components['schemas']['HTTPValidationError'];
+				};
+			};
+		};
+	};
+	remote_excluded_project_cla_excluded_project_delete: {
+		parameters: {
+			query?: never;
+			header: {
+				'X-Internal-Secret': string;
+			};
+			path?: never;
+			cookie?: never;
+		};
+		requestBody: {
+			content: {
+				'application/json': components['schemas']['ExcludedProjectPayload'];
+			};
+		};
+		responses: {
+			/** @description Successful Response */
+			200: {
+				headers: {
+					[name: string]: unknown;
+				};
+				content: {
+					'application/json': unknown;
 				};
 			};
 			/** @description Validation Error */
@@ -1244,4 +1513,13 @@ export interface operations {
 			};
 		};
 	};
+}
+export enum ProjectPlatform {
+	github = 'github',
+	launchpad = 'launchpad'
+}
+export enum Role {
+	admin = 'admin',
+	community_manager = 'community_manager',
+	legal_counsel = 'legal_counsel'
 }
