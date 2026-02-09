@@ -1,6 +1,6 @@
 {
 	"openapi": "3.1.0",
-	"info": { "title": "Canonical CLA", "version": "1.0.0-alpha" },
+	"info": { "title": "Canonical CLA (dev)", "version": "1.0.0-alpha" },
 	"paths": {
 		"/metrics": {
 			"get": {
@@ -183,6 +183,18 @@
 							"title": "Redirect Url"
 						},
 						"description": "The URL to redirect to after successful login (base64 encoded)."
+					},
+					{
+						"name": "redirect_uri",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"anyOf": [{ "type": "string" }, { "type": "null" }],
+							"description": "The redirect URI to redirect to after login.",
+							"examples": ["/dashboard"],
+							"title": "Redirect Uri"
+						},
+						"description": "The redirect URI to redirect to after login."
 					}
 				],
 				"responses": {
@@ -303,6 +315,18 @@
 							"title": "Redirect Url"
 						},
 						"description": "The URL to redirect to after successful logout (base64 encoded)."
+					},
+					{
+						"name": "redirect_uri",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"anyOf": [{ "type": "string" }, { "type": "null" }],
+							"description": "The redirect URI to redirect to after logout.",
+							"examples": ["/dashboard"],
+							"title": "Redirect Uri"
+						},
+						"description": "The redirect URI to redirect to after logout."
 					}
 				],
 				"responses": {
@@ -364,6 +388,18 @@
 							"title": "Redirect Url"
 						},
 						"description": "The URL to redirect to after successful login (base64 encoded)."
+					},
+					{
+						"name": "redirect_uri",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"anyOf": [{ "type": "string" }, { "type": "null" }],
+							"description": "The redirect URI to redirect to after login.",
+							"examples": ["/dashboard"],
+							"title": "Redirect Uri"
+						},
+						"description": "The redirect URI to redirect to after login."
 					}
 				],
 				"responses": {
@@ -472,6 +508,18 @@
 							"title": "Redirect Url"
 						},
 						"description": "The URL to redirect to after successful logout (base64 encoded)."
+					},
+					{
+						"name": "redirect_uri",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"anyOf": [{ "type": "string" }, { "type": "null" }],
+							"description": "The redirect URI to redirect to after logout.",
+							"examples": ["/dashboard"],
+							"title": "Redirect Uri"
+						},
+						"description": "The redirect URI to redirect to after logout."
 					}
 				],
 				"responses": {
@@ -585,7 +633,7 @@
 					"200": {
 						"description": "Successful Response",
 						"content": {
-							"application/json": { "schema": { "$ref": "#/components/schemas/OIDCUserInfo" } }
+							"application/json": { "schema": { "$ref": "#/components/schemas/OIDCProfile" } }
 						}
 					},
 					"401": {
@@ -767,6 +815,19 @@
 				"title": "LaunchpadProfile",
 				"description": "Launchpad user profile."
 			},
+			"OIDCProfile": {
+				"properties": {
+					"user": { "$ref": "#/components/schemas/OIDCUserInfo" },
+					"role": {
+						"anyOf": [{ "$ref": "#/components/schemas/Role" }, { "type": "null" }],
+						"description": "Role of the user."
+					}
+				},
+				"type": "object",
+				"required": ["user", "role"],
+				"title": "OIDCProfile",
+				"description": "Profile from Canonical OIDC."
+			},
 			"OIDCUserInfo": {
 				"properties": {
 					"sub": {
@@ -777,7 +838,7 @@
 						"examples": ["1ee396e6-e522-41f5-b4a4-5480d9543358 "]
 					},
 					"email": {
-						"anyOf": [{ "type": "string" }, { "type": "null" }],
+						"type": "string",
 						"title": "Email",
 						"description": "User's email address",
 						"examples": ["user@canonical.com"]
@@ -821,7 +882,7 @@
 					}
 				},
 				"type": "object",
-				"required": ["sub"],
+				"required": ["sub", "email"],
 				"title": "OIDCUserInfo",
 				"description": "User information from OIDC userinfo endpoint."
 			},
@@ -877,6 +938,12 @@
 				},
 				"type": "object",
 				"title": "OrganizationCreationSuccess"
+			},
+			"Role": {
+				"type": "string",
+				"enum": ["admin", "community_manager", "legal_counsel"],
+				"title": "Role",
+				"description": "Role of an OIDC user."
 			},
 			"ValidationError": {
 				"properties": {
