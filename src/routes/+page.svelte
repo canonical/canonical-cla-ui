@@ -16,7 +16,7 @@
 						<img
 							class="p-navigation__logo-icon"
 							src="https://assets.ubuntu.com/v1/82818827-CoF_white.svg"
-							alt=""
+							alt="Canonical Logo"
 						/>
 					</div>
 					<span class="p-navigation__logo-title">Legal</span>
@@ -27,14 +27,15 @@
 					<button
 						class="p-navigation__link"
 						onclick={() => (menuToggled = !menuToggled)}
-						aria-label="Toggle menu"
+						aria-controls="main-navigation"
+						aria-expanded={menuToggled}
 					>
 						{menuToggled ? 'Close Menu' : 'Menu'}
 					</button>
 				</li>
 			</ul>
 		</div>
-		<nav class="p-navigation__nav">
+		<nav class="p-navigation__nav" id="main-navigation">
 			<ul class="p-navigation__items">
 				<li class="p-navigation__item">
 					<a class="p-navigation__link" href={resolve('/manage')}>Manage</a>
