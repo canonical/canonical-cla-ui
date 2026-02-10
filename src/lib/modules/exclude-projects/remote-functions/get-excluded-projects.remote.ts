@@ -19,7 +19,7 @@ export const getExcludedProjects = query(
 			params: {
 				query: params,
 				header: {
-					'X-Internal-Secret': env.CLA_INTERNAL_API_SECRET
+					'X-Internal-Secret': env.APP_CLA_INTERNAL_API_SECRET
 				}
 			}
 		});

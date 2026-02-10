@@ -1,0 +1,58 @@
+# This file configures Charmcraft.
+# See https://juju.is/docs/sdk/charmcraft-config for guidance.
+
+name: canonical-cla-ui
+summary: Canonical CLA UI
+description: |
+  Canonical CLA UI is a tool for managing and signing Contributor License Agreements (CLAs) for Canonical projects.
+
+type: charm
+base: ubuntu@24.04
+platforms:
+  amd64:
+
+extensions:
+  - go-framework
+
+config:
+  options:
+    origin:
+      type: string
+      description: The origin of the CLA UI.
+      default: 'https://cla.canonical.com'
+    cla-internal-api:
+      type: secret
+      description: The internal API secret for the CLA API (secret).
+
+# Uncomment the integrations used by your application
+# Integrations set to "optional: false" will block the charm
+# until the applications are integrated.
+# requires:
+#   mysql:
+#     interface: mysql_client
+#     optional: false
+#     limit: 1
+#   postgresql:
+#     interface: postgresql_client
+#     optional: false
+#     limit: 1
+#   mongodb:
+#     interface: mongodb_client
+#     optional: false
+#     limit: 1
+#   redis:
+#     interface: redis
+#     optional: false
+#     limit: 1
+#   s3:
+#     interface: s3
+#     optional: false
+#     limit: 1
+#   saml:
+#     interface: saml
+#     optional: false
+#     limit: 1
+#   rabbitmq:
+#     interface: rabbitmq
+#     optional: false
+#     limit: 1

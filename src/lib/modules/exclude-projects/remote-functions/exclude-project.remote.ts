@@ -11,7 +11,7 @@ export const excludeProject = form(excludeProjectSchema, async (project) => {
 		body: project,
 		params: {
 			header: {
-				'X-Internal-Secret': env.CLA_INTERNAL_API_SECRET
+				'X-Internal-Secret': env.APP_CLA_INTERNAL_API_SECRET
 			}
 		}
 	});
@@ -28,7 +28,7 @@ export const unExcludeProject = form(excludeProjectSchema, async (project) => {
 		body: project,
 		params: {
 			header: {
-				'X-Internal-Secret': env.CLA_INTERNAL_API_SECRET
+				'X-Internal-Secret': env.APP_CLA_INTERNAL_API_SECRET
 			}
 		}
 	});

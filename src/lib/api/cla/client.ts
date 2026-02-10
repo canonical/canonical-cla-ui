@@ -3,5 +3,5 @@ import createClient from 'openapi-fetch';
 import type { paths } from './types.js';
 
 export const claApi = createClient<paths>({
-	baseUrl: env.ORIGIN
+	baseUrl: env.APP_ORIGIN
 });

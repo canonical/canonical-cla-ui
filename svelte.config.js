@@ -9,6 +9,10 @@ const config = {
 		},
 		experimental: {
 			remoteFunctions: true
+		},
+		env: {
+			privatePrefix: 'APP_',
+			publicPrefix: 'APP_PUBLIC_'
 		}
 	},
 	compilerOptions: {
