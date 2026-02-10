@@ -3,9 +3,9 @@
 	import { ExcludedProjectIcon } from '$lib/components';
 	import {
 		excludeProject,
-		getExcludedProjects,
 		unExcludeProject
-	} from '$lib/modules/exclude-projects';
+	} from '$lib/modules/exclude-projects/remote-functions/exclude-project.remote';
+	import { getExcludedProjects } from '$lib/modules/exclude-projects/remote-functions/get-excluded-projects.remote';
 	import { createDebounce } from '$lib/utils/debounce';
 	import {
 		ChevronLeftIcon,
@@ -14,19 +14,18 @@
 		PlusIcon,
 		SpinnerIcon
 	} from '@canonical/svelte-icons';
+	import type { HTMLInputAttributes } from 'svelte/elements';
 	const limit = 20;
 	let offset = $state(0);
 	let search = $state('');
-	let platform = $state<ProjectPlatform | undefined>(undefined);
+	let platform = $state<ProjectPlatform | undefined>();
 	const projects = $derived(
 		getExcludedProjects({ limit, offset, query: search, platform: platform || undefined })
 	);
 
-	const handleSearchInput = createDebounce((e: Event) => {
-		if (e.target instanceof HTMLInputElement) {
-			search = e.target.value;
-		}
-	});
+	const handleSearchInput = createDebounce(((e) => {
+		search = e.currentTarget.value;
+	}) satisfies HTMLInputAttributes['oninput']);
 </script>
 
 <section class="p-strip is-shallow">
@@ -44,14 +43,18 @@
 				<label for="project" class="p-form__label">Project</label>
 				<input
 					type="text"
-					name="full_name"
 					id="project"
 					placeholder="example: canonical/ubuntu.com"
+					{...excludeProject.fields.full_name.as('text')}
 				/>
 			</div>
 			<div class="p-form__group grid-col-2">
 				<label for="platform" class="p-form__label">Platform</label>
-				<select name="platform" id="platform" placeholder="Select Platform">
+				<select
+					id="platform"
+					placeholder="Select Platform"
+					{...excludeProject.fields.platform.as('select')}
+				>
 					{#each projects.current?.supported_platforms as platform (platform)}
 						<option value={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</option>
 					{/each}
@@ -70,7 +73,6 @@
 	<div class="row">
 		<h2 class="p-muted-heading">Current Excluded Projects ({projects.current?.total || 0})</h2>
 
-		<!-- JS Only filter -->
 		<div class="grid-row">
 			<div class="p-search-box grid-col-6">
 				<label class="u-off-screen" for="search">Search</label>
@@ -92,7 +94,7 @@
 						search = '';
 					}}><i class="p-icon--close">Close</i></button
 				>
-				<button type="submit" class="p-search-box__button">
+				<button class="p-search-box__button">
 					<i class="p-icon--search">Search</i>
 				</button>
 			</div>
@@ -101,11 +103,7 @@
 				name="platform"
 				id="platform"
 				placeholder="Select Platform"
-				onchange={(e) => {
-					if (e.target instanceof HTMLSelectElement) {
-						platform = e.target.value as ProjectPlatform;
-					}
-				}}
+				bind:value={platform}
 			>
 				<option value="">All Platforms</option>
 				{#each projects.current?.supported_platforms as platform (platform)}
