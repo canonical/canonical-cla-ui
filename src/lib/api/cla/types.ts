@@ -482,6 +482,15 @@ export interface components {
 			emails: string[];
 		};
 		/**
+		 * OIDCProfile
+		 * @description Profile from Canonical OIDC.
+		 */
+		OIDCProfile: {
+			user: components['schemas']['OIDCUserInfo'];
+			/** @description Role of the user. */
+			role: components['schemas']['Role'] | null;
+		};
+		/**
 		 * OIDCUserInfo
 		 * @description User information from OIDC userinfo endpoint.
 		 */
@@ -497,7 +506,7 @@ export interface components {
 			 * @description User's email address
 			 * @example user@canonical.com
 			 */
-			email?: string | null;
+			email: string;
 			/**
 			 * Email Verified
 			 * @description Whether the email is verified
@@ -577,6 +586,12 @@ export interface components {
 			 */
 			message: string;
 		};
+		/**
+		 * Role
+		 * @description Role of an OIDC user.
+		 * @enum {string}
+		 */
+		Role: 'admin' | 'community_manager' | 'legal_counsel';
 		/** ValidationError */
 		ValidationError: {
 			/** Location */
@@ -618,9 +633,11 @@ export type HttpValidationError = components['schemas']['HTTPValidationError'];
 export type IndividualCreateForm = components['schemas']['IndividualCreateForm'];
 export type IndividualCreationSuccess = components['schemas']['IndividualCreationSuccess'];
 export type LaunchpadProfile = components['schemas']['LaunchpadProfile'];
+export type OidcProfile = components['schemas']['OIDCProfile'];
 export type OidcUserInfo = components['schemas']['OIDCUserInfo'];
 export type OrganizationCreateForm = components['schemas']['OrganizationCreateForm'];
 export type OrganizationCreationSuccess = components['schemas']['OrganizationCreationSuccess'];
+export type Role = components['schemas']['Role'];
 export type ValidationError = components['schemas']['ValidationError'];
 export type AppLaunchpadRoutesRedirection_1 =
 	components['schemas']['app__launchpad__routes__Redirection__1'];
@@ -755,6 +772,8 @@ export interface operations {
 			query?: {
 				/** @description The URL to redirect to after successful login (base64 encoded). */
 				redirect_url?: string | null;
+				/** @description The redirect URI to redirect to after login. */
+				redirect_uri?: string | null;
 			};
 			header?: never;
 			path?: never;
@@ -868,6 +887,8 @@ export interface operations {
 			query?: {
 				/** @description The URL to redirect to after successful logout (base64 encoded). */
 				redirect_url?: string | null;
+				/** @description The redirect URI to redirect to after logout. */
+				redirect_uri?: string | null;
 			};
 			header?: never;
 			path?: never;
@@ -938,6 +959,8 @@ export interface operations {
 			query?: {
 				/** @description The URL to redirect to after successful login (base64 encoded). */
 				redirect_url?: string | null;
+				/** @description The redirect URI to redirect to after login. */
+				redirect_uri?: string | null;
 			};
 			header?: never;
 			path?: never;
@@ -1040,6 +1063,8 @@ export interface operations {
 			query?: {
 				/** @description The URL to redirect to after successful logout (base64 encoded). */
 				redirect_url?: string | null;
+				/** @description The redirect URI to redirect to after logout. */
+				redirect_uri?: string | null;
 			};
 			header?: never;
 			path?: never;
@@ -1164,7 +1189,7 @@ export interface operations {
 					[name: string]: unknown;
 				};
 				content: {
-					'application/json': components['schemas']['OIDCUserInfo'];
+					'application/json': components['schemas']['OIDCProfile'];
 				};
 			};
 			/** @description Unauthorized */
