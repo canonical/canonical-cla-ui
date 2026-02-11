@@ -26,6 +26,12 @@
 	const handleSearchInput = createDebounce(((e) => {
 		search = e.currentTarget.value;
 	}) satisfies HTMLInputAttributes['oninput']);
+
+	const setupExcludeProjectForm = () => {
+		excludeProject.fields.platform.set(ProjectPlatform.github);
+	};
+
+	setupExcludeProjectForm();
 </script>
 
 <section class="p-strip is-shallow">
@@ -34,9 +40,9 @@
 		<form
 			class="p-form grid-row"
 			{...excludeProject.enhance(async ({ form, submit }) => {
-				await submit();
-				projects.refresh();
+				await submit().updates(projects);
 				form.reset();
+				setupExcludeProjectForm();
 			})}
 		>
 			<div class="p-form__group grid-col-6">
