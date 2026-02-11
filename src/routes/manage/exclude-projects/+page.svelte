@@ -26,6 +26,12 @@
 	const handleSearchInput = createDebounce(((e) => {
 		search = e.currentTarget.value;
 	}) satisfies HTMLInputAttributes['oninput']);
+
+	const setupExcludeProjectForm = () => {
+		excludeProject.fields.platform.set(ProjectPlatform.github);
+	};
+
+	setupExcludeProjectForm();
 </script>
 
 <section class="p-strip is-shallow">
@@ -34,9 +40,9 @@
 		<form
 			class="p-form grid-row"
 			{...excludeProject.enhance(async ({ form, submit }) => {
-				await submit();
-				projects.refresh();
+				await submit().updates(projects);
 				form.reset();
+				setupExcludeProjectForm();
 			})}
 		>
 			<div class="p-form__group grid-col-6">
@@ -55,7 +61,7 @@
 					placeholder="Select Platform"
 					{...excludeProject.fields.platform.as('select')}
 				>
-					{#each projects.current?.supported_platforms as platform (platform)}
+					{#each Object.values(ProjectPlatform) as platform (platform)}
 						<option value={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</option>
 					{/each}
 				</select>
@@ -106,7 +112,7 @@
 				bind:value={platform}
 			>
 				<option value="">All Platforms</option>
-				{#each projects.current?.supported_platforms as platform (platform)}
+				{#each Object.values(ProjectPlatform) as platform (platform)}
 					<option value={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</option>
 				{/each}
 			</select>

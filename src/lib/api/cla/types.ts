@@ -161,10 +161,10 @@ export interface paths {
 		put?: never;
 		post?: never;
 		/**
-		 * Remote Excluded Project
+		 * Remove Excluded Project
 		 * @description Remove an excluded project from the CLA check.
 		 */
-		delete: operations['remote_excluded_project_cla_excluded_project_delete'];
+		delete: operations['remove_excluded_project_cla_excluded_project_delete'];
 		options?: never;
 		head?: never;
 		patch?: never;
@@ -486,7 +486,7 @@ export interface components {
 			platform: components['schemas']['ProjectPlatform'];
 			/**
 			 * Full Name
-			 * @description The full name of the project, this include the organization name and the project name.
+			 * @description The full name of the project, this includes the organization name and the project name.
 			 * @example canonical/ubuntu.com
 			 */
 			full_name: string;
@@ -495,8 +495,6 @@ export interface components {
 		ExcludedProjectListingPayload: {
 			/** Projects */
 			projects: components['schemas']['ExcludedProjectPayload'][];
-			/** Supported Platforms */
-			supported_platforms: components['schemas']['ProjectPlatform'][];
 			/** Total */
 			total: number;
 		};
@@ -506,7 +504,7 @@ export interface components {
 			platform: components['schemas']['ProjectPlatform'];
 			/**
 			 * Full Name
-			 * @description The full name of the project, this include the organization name and the project name.
+			 * @description The full name of the project, this includes the organization name and the project name.
 			 * @example canonical/ubuntu.com
 			 */
 			full_name: string;
@@ -1001,7 +999,7 @@ export interface operations {
 			};
 		};
 	};
-	remote_excluded_project_cla_excluded_project_delete: {
+	remove_excluded_project_cla_excluded_project_delete: {
 		parameters: {
 			query?: never;
 			header: {
