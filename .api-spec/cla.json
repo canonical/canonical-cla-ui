@@ -317,8 +317,7 @@
 						"schema": {
 							"anyOf": [{ "$ref": "#/components/schemas/ProjectPlatform" }, { "type": "null" }],
 							"title": "Platform",
-							"description": "The platform to filter by",
-							"default": "github"
+							"description": "The platform to filter by"
 						},
 						"description": "The platform to filter by"
 					},
@@ -352,9 +351,9 @@
 		"/cla/excluded-project": {
 			"delete": {
 				"tags": ["CLA"],
-				"summary": "Remote Excluded Project",
+				"summary": "Remove Excluded Project",
 				"description": "Remove an excluded project from the CLA check.",
-				"operationId": "remote_excluded_project_cla_excluded_project_delete",
+				"operationId": "remove_excluded_project_cla_excluded_project_delete",
 				"security": [{ "OIDCAccessTokenCookieSession": [] }],
 				"parameters": [
 					{
@@ -955,7 +954,7 @@
 					"full_name": {
 						"type": "string",
 						"title": "Full Name",
-						"description": "The full name of the project, this include the organization name and the project name.",
+						"description": "The full name of the project, this includes the organization name and the project name.",
 						"examples": ["canonical/ubuntu.com"]
 					}
 				},
@@ -970,15 +969,10 @@
 						"type": "array",
 						"title": "Projects"
 					},
-					"supported_platforms": {
-						"items": { "$ref": "#/components/schemas/ProjectPlatform" },
-						"type": "array",
-						"title": "Supported Platforms"
-					},
 					"total": { "type": "integer", "title": "Total" }
 				},
 				"type": "object",
-				"required": ["projects", "supported_platforms", "total"],
+				"required": ["projects", "total"],
 				"title": "ExcludedProjectListingPayload"
 			},
 			"ExcludedProjectPayload": {
@@ -990,7 +984,7 @@
 					"full_name": {
 						"type": "string",
 						"title": "Full Name",
-						"description": "The full name of the project, this include the organization name and the project name.",
+						"description": "The full name of the project, this includes the organization name and the project name.",
 						"examples": ["canonical/ubuntu.com"]
 					}
 				},

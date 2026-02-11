@@ -61,7 +61,7 @@
 					placeholder="Select Platform"
 					{...excludeProject.fields.platform.as('select')}
 				>
-					{#each projects.current?.supported_platforms as platform (platform)}
+					{#each Object.values(ProjectPlatform) as platform (platform)}
 						<option value={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</option>
 					{/each}
 				</select>
@@ -112,7 +112,7 @@
 				bind:value={platform}
 			>
 				<option value="">All Platforms</option>
-				{#each projects.current?.supported_platforms as platform (platform)}
+				{#each Object.values(ProjectPlatform) as platform (platform)}
 					<option value={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</option>
 				{/each}
 			</select>
