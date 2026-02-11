@@ -1,5 +1,5 @@
 .p-navigation__item {
-	max-width: none;
+	max-width: none !important;
 }
 
 [class^='p-button'] {

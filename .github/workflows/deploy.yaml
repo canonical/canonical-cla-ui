@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: "Target environment (Staging or Production)"
+        description: 'Target environment (Staging or Production)'
         required: false
         type: environment
-        default: "Production"
+        default: 'Production'
       commit:
-        description: "Commit SHA"
+        description: 'Commit SHA'
         required: false
         type: string
         default: HEAD
@@ -33,7 +33,7 @@ on:
 #  VAULT_APPROLE_SECRET_ID (uuid)
 
 env:
-  DEPLOYMENT_ENV: ${{ github.event.inputs.environment || 'Staging' }}
+  DEPLOYMENT_ENV: ${{ github.event.inputs.environment || 'Production' }}
   CHARM_BUILD_NAME: ${{ github.event.repository.name }}-${{ github.sha }}.charm
   ROCK_BUILD_NAME: ${{ github.event.repository.name }}-${{ github.sha }}.rock
 
@@ -79,21 +79,10 @@ jobs:
           fetch-depth: 0
           ref: ${{ needs.commit-check.outputs.REF }}
 
-      # Cache the rock file for production rollout
-      - name: Cache rock
-        id: rock-cache
-        uses: actions/cache@v4
-        with:
-          path: ./*.rock
-          key: ${{ runner.os}}-rock-${{ hashFiles('**') }}
-
       - name: Install rockcraft
-        if: steps.rock-cache.outputs.cache-hit != 'true'
         run: |
           sudo snap install --classic rockcraft
-
       - name: Pack project
-        if: steps.rock-cache.outputs.cache-hit != 'true'
         id: rockcraft-pack
         run: |
           sudo rockcraft pack  -v --destructive-mode
@@ -112,6 +101,7 @@ jobs:
           echo $DOCKERHUB_MIRROR
           echo "ghcr_image_url=$IMAGE_URL" >> $GITHUB_OUTPUT
           echo "image_url=$IMAGE_URL" >> $GITHUB_OUTPUT
+
       - name: Push to GHCR
         run: |
           echo "Pushing to GHCR.."
@@ -167,8 +157,7 @@ jobs:
 
   deploy:
     needs: [commit-check, rockcraft-pack, charmcraft-pack]
-    runs-on:
-      [self-hosted, self-hosted-linux-amd64-jammy-private-endpoint-medium]
+    runs-on: [self-hosted, self-hosted-linux-amd64-jammy-private-endpoint-medium]
     environment:
       name: ${{ inputs.environment || 'Staging' }}
       url: ${{ vars.WEBSITE_URL }}
@@ -219,5 +208,5 @@ jobs:
           cat ./image_metadata.json
           # run the deploy command
           # in a fresh environment first
-          juju deploy ./charm_amd64.charm --resource app-image=./image_metadata.json canonical-cla-ui
-          # juju refresh canonical-cla-ui --path=./charm_amd64.charm --resource app-image=./image_metadata.json
+          juju deploy ./*.charm --resource app-image=./image_metadata.json canonical-cla-ui
+          # juju refresh canonical-cla-ui --path=./*.charm --resource app-image=./image_metadata.json

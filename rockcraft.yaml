@@ -1,6 +1,6 @@
 name: canonical-cla-ui
 base: ubuntu@24.04
-version: "1.0.0"
+version: '1.0.0'
 summary: Canonical CLA UI
 description: |
   Canonical CLA UI is a tool for managing and signing Contributor License Agreements (CLAs) for Canonical projects.
@@ -17,9 +17,7 @@ parts:
   app:
     plugin: npm
     npm-include-node: true
-    npm-node-version: "22"
-    build-environment:
-      - NPM_CONFIG_IGNORE_SCRIPTS: "true"
+    npm-node-version: '22'
     source: .
     source-type: local
     overlay-packages:
