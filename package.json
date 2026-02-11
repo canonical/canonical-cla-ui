@@ -22,7 +22,7 @@
 		"build-storybook": "storybook build",
 		"openapi:update": "bun run openapi:update-schema && bun run openapi:generate-types",
 		"openapi:update-schema": "bun run --env-file=.env --env-file=.env.local scripts/openapi-update-schema.ts",
-		"openapi:generate-types": "openapi-typescript .api-spec/cla.json -o src/lib/api/cla/types.ts --root-types --root-types-no-schema-prefix"
+		"openapi:generate-types": "openapi-typescript .api-spec/cla.json -o src/lib/api/cla/types.ts --root-types --root-types-no-schema-prefix --enum"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^5.0.0",
@@ -62,6 +62,7 @@
 	},
 	"dependencies": {
 		"@canonical/svelte-icons": "^0.0.9",
-		"openapi-fetch": "^0.15.0"
+		"openapi-fetch": "^0.15.0",
+		"valibot": "^1.2.0"
 	}
 }

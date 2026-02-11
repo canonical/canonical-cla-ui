@@ -36,7 +36,11 @@
 			</ul>
 		</div>
 		<nav class="p-navigation__nav" id="main-navigation">
-			<ul class="p-navigation__items"></ul>
+			<ul class="p-navigation__items">
+				<li class="p-navigation__item">
+					<a class="p-navigation__link" href={resolve('/manage')}>Manage</a>
+				</li>
+			</ul>
 			<ul class="p-navigation__items">
 				<li class="p-navigation__item--dropdown-toggle" class:is-active={userMenuToggled}>
 					<button
@@ -49,10 +53,10 @@
 					>
 						<img
 							style="width: 24px; height: 24px; border-radius: 50%;"
-							src={data.oidcProfile.picture}
-							alt={data.oidcProfile.name}
+							src={data.oidcProfile.user.picture}
+							alt={data.oidcProfile.user.name}
 						/>
-						{data.oidcProfile.name}
+						{data.oidcProfile.user.name}
 					</button>
 					<ul
 						class="p-navigation__dropdown--right"

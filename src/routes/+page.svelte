@@ -47,7 +47,7 @@
 						profiles={{
 							github: data.githubProfile?.username,
 							launchpad: data.launchpadProfile?.username,
-							oidc: data.oidcProfile?.name ?? undefined
+							oidc: data.oidcProfile?.user?.name ?? undefined
 						}}
 					/>
 				</li>

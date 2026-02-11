@@ -165,6 +165,228 @@
 				]
 			}
 		},
+		"/cla/exclude-project": {
+			"post": {
+				"tags": ["CLA"],
+				"summary": "Exclude Project",
+				"description": "Exclude a project from the CLA check.",
+				"operationId": "exclude_project_cla_exclude_project_post",
+				"security": [{ "OIDCAccessTokenCookieSession": [] }],
+				"parameters": [
+					{
+						"name": "X-Internal-Secret",
+						"in": "header",
+						"required": true,
+						"schema": { "type": "string", "title": "X-Internal-Secret" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/ExcludedProjectCreatePayload" }
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/cla/excluded-projects": {
+			"get": {
+				"tags": ["CLA"],
+				"summary": "Projects Excluded",
+				"description": "Check if a project is excluded from the CLA check.",
+				"operationId": "projects_excluded_cla_excluded_projects_get",
+				"parameters": [
+					{
+						"name": "projects",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "array",
+							"items": { "type": "string" },
+							"maxItems": 100,
+							"title": "Projects",
+							"description": "A list of projects to check for CLA signatories",
+							"examples": ["github@canonical/ubuntu.com,launchpad@canonical/snapd"],
+							"default": []
+						},
+						"description": "A list of projects to check for CLA signatories"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": { "$ref": "#/components/schemas/ExcludedProjectsResponse" },
+									"title": "Response Projects Excluded Cla Excluded Projects Get"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/cla/list-excluded-projects": {
+			"get": {
+				"tags": ["CLA"],
+				"summary": "List Excluded Projects",
+				"description": "List all excluded projects.",
+				"operationId": "list_excluded_projects_cla_list_excluded_projects_get",
+				"security": [{ "OIDCAccessTokenCookieSession": [] }],
+				"parameters": [
+					{
+						"name": "limit",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"maximum": 100,
+							"minimum": 1,
+							"title": "Limit",
+							"description": "The maximum number of projects to return",
+							"default": 100
+						},
+						"description": "The maximum number of projects to return"
+					},
+					{
+						"name": "offset",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"type": "integer",
+							"minimum": 0,
+							"title": "Offset",
+							"description": "The number of projects to skip",
+							"default": 0
+						},
+						"description": "The number of projects to skip"
+					},
+					{
+						"name": "descending",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"anyOf": [{ "type": "boolean" }, { "type": "null" }],
+							"title": "Descending",
+							"description": "Whether to sort the projects in descending order",
+							"default": true
+						},
+						"description": "Whether to sort the projects in descending order"
+					},
+					{
+						"name": "query",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"anyOf": [{ "type": "string" }, { "type": "null" }],
+							"title": "Query",
+							"description": "The query to search for projects",
+							"default": ""
+						},
+						"description": "The query to search for projects"
+					},
+					{
+						"name": "platform",
+						"in": "query",
+						"required": false,
+						"schema": {
+							"anyOf": [{ "$ref": "#/components/schemas/ProjectPlatform" }, { "type": "null" }],
+							"title": "Platform",
+							"description": "The platform to filter by"
+						},
+						"description": "The platform to filter by"
+					},
+					{
+						"name": "X-Internal-Secret",
+						"in": "header",
+						"required": true,
+						"schema": { "type": "string", "title": "X-Internal-Secret" }
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/ExcludedProjectListingPayload" }
+							}
+						}
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
+		"/cla/excluded-project": {
+			"delete": {
+				"tags": ["CLA"],
+				"summary": "Remove Excluded Project",
+				"description": "Remove an excluded project from the CLA check.",
+				"operationId": "remove_excluded_project_cla_excluded_project_delete",
+				"security": [{ "OIDCAccessTokenCookieSession": [] }],
+				"parameters": [
+					{
+						"name": "X-Internal-Secret",
+						"in": "header",
+						"required": true,
+						"schema": { "type": "string", "title": "X-Internal-Secret" }
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/ExcludedProjectPayload" }
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful Response",
+						"content": { "application/json": { "schema": {} } }
+					},
+					"422": {
+						"description": "Validation Error",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+							}
+						}
+					}
+				}
+			}
+		},
 		"/github/login": {
 			"get": {
 				"tags": ["GitHub"],
@@ -723,6 +945,62 @@
 				"required": ["detail"],
 				"title": "ErrorResponse"
 			},
+			"ExcludedProjectCreatePayload": {
+				"properties": {
+					"platform": {
+						"allOf": [{ "$ref": "#/components/schemas/ProjectPlatform" }],
+						"description": "The platform of the project"
+					},
+					"full_name": {
+						"type": "string",
+						"title": "Full Name",
+						"description": "The full name of the project, this includes the organization name and the project name.",
+						"examples": ["canonical/ubuntu.com"]
+					}
+				},
+				"type": "object",
+				"required": ["platform", "full_name"],
+				"title": "ExcludedProjectCreatePayload"
+			},
+			"ExcludedProjectListingPayload": {
+				"properties": {
+					"projects": {
+						"items": { "$ref": "#/components/schemas/ExcludedProjectPayload" },
+						"type": "array",
+						"title": "Projects"
+					},
+					"total": { "type": "integer", "title": "Total" }
+				},
+				"type": "object",
+				"required": ["projects", "total"],
+				"title": "ExcludedProjectListingPayload"
+			},
+			"ExcludedProjectPayload": {
+				"properties": {
+					"platform": {
+						"allOf": [{ "$ref": "#/components/schemas/ProjectPlatform" }],
+						"description": "The platform of the project"
+					},
+					"full_name": {
+						"type": "string",
+						"title": "Full Name",
+						"description": "The full name of the project, this includes the organization name and the project name.",
+						"examples": ["canonical/ubuntu.com"]
+					}
+				},
+				"type": "object",
+				"required": ["platform", "full_name"],
+				"title": "ExcludedProjectPayload"
+			},
+			"ExcludedProjectsResponse": {
+				"properties": {
+					"project": { "$ref": "#/components/schemas/ExcludedProjectPayload" },
+					"excluded": { "type": "boolean", "title": "Excluded" }
+				},
+				"type": "object",
+				"required": ["project", "excluded"],
+				"title": "ExcludedProjectsResponse"
+			},
 			"GitHubProfile": {
 				"properties": {
 					"username": { "type": "string", "title": "Username", "description": "GitHub username." },
@@ -939,6 +1217,11 @@
 				"type": "object",
 				"title": "OrganizationCreationSuccess"
 			},
+			"ProjectPlatform": {
+				"type": "string",
+				"enum": ["github", "launchpad"],
+				"title": "ProjectPlatform"
+			},
 			"Role": {
 				"type": "string",
 				"enum": ["admin", "community_manager", "legal_counsel"],
@@ -997,6 +1280,11 @@
 				"in": "cookie",
 				"name": "launchpad_access_token_session"
 			},
+			"OIDCAccessTokenCookieSession": {
+				"type": "apiKey",
+				"in": "cookie",
+				"name": "canonical_oidc_session"
+			},
 			"GithubPendingAuthCookieSession": {
 				"type": "apiKey",
 				"in": "cookie",
@@ -1011,11 +1299,6 @@
 				"type": "apiKey",
 				"in": "cookie",
 				"name": "canonical_oidc_login_session"
-			},
-			"OIDCAccessTokenCookieSession": {
-				"type": "apiKey",
-				"in": "cookie",
-				"name": "canonical_oidc_session"
 			}
 		}
 	}

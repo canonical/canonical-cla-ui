@@ -77,10 +77,6 @@
 		align-items: center;
 		padding: 1rem 1rem 0.8rem 2.6rem;
 		:global(.p-button--base) {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 0.5rem;
 			margin: 0;
 		}
 	}
