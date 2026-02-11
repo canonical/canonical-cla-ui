@@ -100,9 +100,6 @@
 						search = '';
 					}}><i class="p-icon--close">Close</i></button
 				>
-				<button class="p-search-box__button">
-					<i class="p-icon--search">Search</i>
-				</button>
 			</div>
 			<select
 				class="grid-col-2"
@@ -125,7 +122,7 @@
 				Loading excluded projects...
 			</p>
 		{:else}
-			{#each projects.current?.projects as project, index (`project-listing-item-${index}`)}
+			{#each projects.current?.projects as project (`project-listing-${project.full_name}-${project.platform}`)}
 				<ul class="p-list">
 					<li class="p-list__item project-listing-item">
 						<ExcludedProjectIcon platform={project.platform} />
@@ -138,8 +135,8 @@
 									projects.refresh();
 								})}
 						>
-							<input type="hidden" name="platform" value={project.platform} />
-							<input type="hidden" name="full_name" value={project.full_name} />
+							<input {...unExcludeProject.fields.platform.as('hidden', project.platform)} />
+							<input {...unExcludeProject.fields.full_name.as('hidden', project.full_name)} />
 							<button type="submit" class="p-button--base only-icon">
 								<DeleteIcon />
 							</button>
@@ -161,7 +158,7 @@
 					>
 				{/if}
 				<span class="p-text--small"
-					>Page {offset / limit + 1} of {Math.ceil((projects.current?.total || 0) / limit)}</span
+					>Page {offset / limit + 1} of {Math.floor((projects.current?.total || 0) / limit)}</span
 				>
 				{#if projects.current?.total && projects.current.total > limit * (offset + 1)}
 					<button
