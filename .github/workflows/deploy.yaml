@@ -205,8 +205,12 @@ jobs:
           export JUJU_MODEL=admin/$JUJU_MODEL
           echo "Deploying to $JUJU_MODEL"
           echo "{\"ImageName\": \"${{ needs.rockcraft-pack.outputs.image_url }}\", \"username\":\"${{ secrets.GHCR_READ_USERNAME }}\", \"password\":\"${{ secrets.GHCR_READ_TOKEN }}\"}" > ./image_metadata.json
-          cat ./image_metadata.json
+          CHARM_FILE=$(ls ./*.charm | head -n 1)
+          if [ -z "$CHARM_FILE" ]; then
+            echo "Error: No .charm file found"
+            exit 1
+          fi
           # run the deploy command
           # in a fresh environment first
-          juju deploy ./*.charm --resource app-image=./image_metadata.json canonical-cla-ui
-          # juju refresh canonical-cla-ui --path=./*.charm --resource app-image=./image_metadata.json
+          # juju deploy "$CHARM_FILE" --resource app-image=./image_metadata.json canonical-cla-ui
+          juju refresh canonical-cla-ui --path="$CHARM_FILE" --resource app-image=./image_metadata.json
