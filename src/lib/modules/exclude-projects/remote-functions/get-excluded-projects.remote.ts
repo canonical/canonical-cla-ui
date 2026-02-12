@@ -1,6 +1,6 @@
 import { getRequestEvent, query } from '$app/server';
 import { env } from '$env/dynamic/private';
-import { claApi, ProjectPlatform } from '$lib/api';
+import { claApi, extractErrorMessage, ProjectPlatform } from '$lib/api';
 import { error } from '@sveltejs/kit';
 import * as v from 'valibot';
 
@@ -24,10 +24,7 @@ export const getExcludedProjects = query(
 			}
 		});
 		if (response.error) {
-			const errorMessage = Array.isArray(response.error.detail)
-				? response.error.detail.map((e) => e.msg).join(', ')
-				: response.error.detail || 'An unknown error occurred';
-			error(response.response.status, errorMessage);
+			error(response.response.status, extractErrorMessage(response.error));
 		}
 		return response.data;
 	}

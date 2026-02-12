@@ -18,8 +18,8 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
 		}
 	});
 	return {
-		oidcProfile: oidcProfileResponse.data ?? null,
-		githubProfile: githubProfileResponse.data ?? null,
-		launchpadProfile: launchpadProfileResponse.data ?? null
+		oidcProfile: oidcProfileResponse.data,
+		githubProfile: githubProfileResponse.data,
+		launchpadProfile: launchpadProfileResponse.data
 	};
 };
