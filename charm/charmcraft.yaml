@@ -23,6 +23,16 @@ config:
     cla-internal-api:
       type: secret
       description: The internal API secret for the CLA API (secret).
+    sentry-dsn:
+      type: string
+      description: The Sentry DSN for the CLA UI.
+    sentry-auth-token:
+      type: secret
+      description: The Sentry auth token for the CLA UI.
+    sentry-environment:
+      type: string
+      description: The Sentry environment for the CLA UI (staging or production).
+      default: 'production'
 
 # Uncomment the integrations used by your application
 # Integrations set to "optional: false" will block the charm
