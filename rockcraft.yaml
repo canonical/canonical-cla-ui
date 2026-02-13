@@ -1,0 +1,36 @@
+name: canonical-cla-ui
+base: ubuntu@24.04
+version: '1.0.0'
+summary: Canonical CLA UI
+description: |
+  Canonical CLA UI is a tool for managing and signing Contributor License Agreements (CLAs) for Canonical projects.
+platforms:
+  amd64:
+
+services:
+  go:
+    override: replace
+    command: bun /app/build/index.js
+    startup: enabled
+
+parts:
+  app:
+    plugin: npm
+    npm-include-node: true
+    npm-node-version: '22'
+    source: .
+    source-type: local
+    overlay-packages:
+      - ca-certificates
+      - coreutils
+      - bash
+    override-build: |
+      craftctl default
+      set -eux
+      npm install -g bun
+      # this is needed to upload the sourcemaps to Sentry during the build
+      export APP_SENTRY_AUTH_TOKEN=__APP_SENTRY_AUTH_TOKEN__
+      bun install
+      bun run build
+      mkdir -p ${CRAFT_PART_INSTALL}/app
+      cp -ar * ${CRAFT_PART_INSTALL}/app

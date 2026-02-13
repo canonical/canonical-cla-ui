@@ -13,13 +13,13 @@ export const getExcludedProjects = query(
 		platform: v.optional(v.enum(ProjectPlatform))
 	}),
 	async (params) => {
-		const event = getRequestEvent();
+		const { fetch } = getRequestEvent();
 		const response = await claApi.GET('/cla/list-excluded-projects', {
-			fetch: event?.fetch,
+			fetch,
 			params: {
 				query: params,
 				header: {
-					'X-Internal-Secret': env.CLA_INTERNAL_API_SECRET
+					'X-Internal-Secret': env.APP_CLA_INTERNAL_API_SECRET
 				}
 			}
 		});

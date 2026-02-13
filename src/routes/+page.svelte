@@ -49,6 +49,7 @@
 							launchpad: data.launchpadProfile?.username,
 							oidc: data.oidcProfile?.user?.name ?? undefined
 						}}
+						hideOidcLogin
 					/>
 				</li>
 			</ul>

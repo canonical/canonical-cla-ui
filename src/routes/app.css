@@ -1,5 +1,5 @@
 .p-navigation__item {
-	max-width: none;
+	max-width: none !important;
 }
 
 [class^='p-button'] {
@@ -7,6 +7,8 @@
 	align-items: center;
 	justify-content: center;
 	gap: 0.5rem;
+	width: fit-content;
+	word-break: keep-all;
 
 	&.only-icon {
 		padding: 0;

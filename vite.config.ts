@@ -1,3 +1,4 @@
+import { sentrySvelteKit } from '@sentry/sveltekit';
 import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
 import devtoolsJson from 'vite-plugin-devtools-json';
@@ -10,7 +11,15 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-	plugins: [sveltekit(), devtoolsJson()],
+	plugins: [
+		sentrySvelteKit({
+			org: 'canonical-ax',
+			project: 'canonical-cla',
+			authToken: process.env.APP_SENTRY_AUTH_TOKEN
+		}),
+		sveltekit(),
+		devtoolsJson()
+	],
 	test: {
 		expect: {
 			requireAssertions: true
