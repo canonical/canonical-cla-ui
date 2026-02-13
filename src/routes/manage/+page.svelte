@@ -3,7 +3,7 @@
 	import { resolve } from '$app/paths';
 
 	let { data }: PageProps = $props();
-	const userRole = $derived(data.oidcProfile.role);
+	const userRole = $derived(data.oidcProfile?.role);
 </script>
 
 <section class="p-strip is-shallow">

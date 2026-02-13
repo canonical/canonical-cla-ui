@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { LoginStatus } from '$lib/components';
+	import LoginStatus from '$lib/components/LoginStatus.svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -32,13 +32,13 @@
 				</header>
 				<div class="p-card__inner page-inner">
 					<h1 class="p-heading--4">Login</h1>
-
 					<LoginStatus
 						profiles={{
-							github: data.githubProfile?.username,
-							launchpad: data.launchpadProfile?.username,
-							oidc: data.oidcProfile?.user?.name ?? undefined
+							oidc: data.oidcProfile?.user?.name ?? undefined,
+							launchpad: data.launchpadProfile?.username ?? undefined,
+							github: data.githubProfile?.username ?? undefined
 						}}
+						hideOidcLogin={false}
 					/>
 				</div>
 			</div>
