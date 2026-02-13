@@ -2,16 +2,12 @@ import { claApi } from '$lib';
 import { error } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ cookies, locals }) => {
+export const load: LayoutServerLoad = async ({ fetch, locals }) => {
 	const githubProfileResponse = claApi.GET('/github/profile', {
-		headers: {
-			Cookie: `github_access_token_session="${cookies.get('github_access_token_session')}"`
-		}
+		fetch
 	});
 	const launchpadProfileResponse = claApi.GET('/launchpad/profile', {
-		headers: {
-			Cookie: `launchpad_access_token_session="${cookies.get('launchpad_access_token_session')}"`
-		}
+		fetch
 	});
 
 	// locals.oidcProfile is set if the user is visiting a page that requires authentication, so we don't need to fetch the profile again
@@ -21,9 +17,7 @@ export const load: LayoutServerLoad = async ({ cookies, locals }) => {
 			return { data: locals.oidcProfile, error: undefined };
 		}
 		return claApi.GET('/oidc/profile', {
-			headers: {
-				Cookie: `canonical_oidc_session="${cookies.get('canonical_oidc_session')}"`
-			}
+			fetch
 		});
 	};
 

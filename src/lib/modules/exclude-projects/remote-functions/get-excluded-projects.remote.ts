@@ -13,9 +13,9 @@ export const getExcludedProjects = query(
 		platform: v.optional(v.enum(ProjectPlatform))
 	}),
 	async (params) => {
-		const event = getRequestEvent();
+		const { fetch } = getRequestEvent();
 		const response = await claApi.GET('/cla/list-excluded-projects', {
-			fetch: event?.fetch,
+			fetch,
 			params: {
 				query: params,
 				header: {

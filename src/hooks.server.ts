@@ -8,9 +8,7 @@ const handleManageLoginRedirect: Handle = async ({ event, resolve }) => {
 	const isManageSubPath = event.url.pathname.startsWith('/ui/manage');
 	if (isManageSubPath) {
 		const oidcProfileResponse = await claApi.GET('/oidc/profile', {
-			headers: {
-				Cookie: `canonical_oidc_session="${event.cookies.get('canonical_oidc_session')}"`
-			}
+			fetch: event.fetch
 		});
 		if (oidcProfileResponse.response.status !== 401 && oidcProfileResponse.error) {
 			error(500, {
