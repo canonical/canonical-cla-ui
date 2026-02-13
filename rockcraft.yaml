@@ -28,6 +28,8 @@ parts:
       craftctl default
       set -eux
       npm install -g bun
+      # this is needed to upload the sourcemaps to Sentry during the build
+      export APP_SENTRY_AUTH_TOKEN=__APP_SENTRY_AUTH_TOKEN__
       bun install
       bun run build
       mkdir -p ${CRAFT_PART_INSTALL}/app

@@ -85,6 +85,7 @@ jobs:
       - name: Pack project
         id: rockcraft-pack
         run: |
+          sed -i "s|__APP_SENTRY_AUTH_TOKEN__|${{ secrets.APP_SENTRY_AUTH_TOKEN }}|g" rockcraft.yaml
           sudo rockcraft pack  -v --destructive-mode
 
       - name: Upload rock file
