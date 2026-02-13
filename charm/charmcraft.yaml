@@ -23,15 +23,15 @@ config:
     cla-internal-api:
       type: secret
       description: The internal API secret for the CLA API (secret).
-    sentry-dsn:
+    public-sentry-dsn:
       type: string
       description: The Sentry DSN for the CLA UI.
-    sentry-auth-token:
+    sentry-auth:
       type: secret
       description: The Sentry auth token for the CLA UI.
-    sentry-environment:
+    public-env:
       type: string
-      description: The Sentry environment for the CLA UI (staging or production).
+      description: The environment for the CLA UI (staging or production).
       default: 'production'
 
 # Uncomment the integrations used by your application

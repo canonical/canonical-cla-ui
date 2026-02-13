@@ -157,7 +157,7 @@ jobs:
 
   deploy:
     needs: [commit-check, rockcraft-pack, charmcraft-pack]
-    runs-on: [self-hosted, self-hosted-linux-amd64-jammy-private-endpoint-medium]
+    runs-on: [self-hosted, self-hosted-linux-amd64-noble-private-endpoint-medium]
     environment:
       name: ${{ inputs.environment || 'Staging' }}
       url: ${{ vars.WEBSITE_URL }}
