@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/sveltekit';
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
 
 Sentry.init({
 	dsn: env.APP_PUBLIC_SENTRY_DSN,

@@ -1,6 +1,6 @@
 import { asset } from '$app/paths';
 import { claApi } from '$lib';
-import { handleErrorWithSentry, sentryHandle } from '@sentry/sveltekit';
+import * as Sentry from '@sentry/sveltekit';
 import { error, redirect, type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 
@@ -30,7 +30,7 @@ const handleManageLoginRedirect: Handle = async ({ event, resolve }) => {
 	return resolve(event);
 };
 
-export const handle = sequence(sentryHandle(), handleManageLoginRedirect);
+export const handle = sequence(Sentry.sentryHandle(), handleManageLoginRedirect);
 
 // If you have a custom error handler, pass it to `handleErrorWithSentry`
-export const handleError = handleErrorWithSentry();
+export const handleError = Sentry.handleErrorWithSentry();
