@@ -1,4 +1,4 @@
-import { asset } from '$app/paths';
+import { resolve as resolvePath } from '$app/paths';
 import { claApi } from '$lib';
 import * as Sentry from '@sentry/sveltekit';
 import { error, redirect, type Handle } from '@sveltejs/kit';
@@ -17,7 +17,7 @@ const handleManageLoginRedirect: Handle = async ({ event, resolve }) => {
 		}
 
 		if (oidcProfileResponse.response.status === 401 || !oidcProfileResponse.data) {
-			const loginPage = asset('/login');
+			const loginPage = resolvePath('/login');
 			redirect(
 				302,
 				`${loginPage}?redirect_uri=${encodeURIComponent(event.url.pathname + event.url.search)}`
