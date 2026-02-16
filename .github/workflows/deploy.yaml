@@ -15,7 +15,6 @@ on:
         default: HEAD
   push:
     branches:
-      - deployment
       - main
 
 ## See ~/.vaultrc in your Juju model
