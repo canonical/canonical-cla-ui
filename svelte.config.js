@@ -8,7 +8,17 @@ const config = {
 			base: '/ui'
 		},
 		experimental: {
-			remoteFunctions: true
+			remoteFunctions: true,
+			tracing: {
+				server: true
+			},
+			instrumentation: {
+				server: true
+			}
+		},
+		env: {
+			privatePrefix: 'APP_',
+			publicPrefix: 'APP_PUBLIC_'
 		}
 	},
 	compilerOptions: {
