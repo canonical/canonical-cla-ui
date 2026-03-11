@@ -25,6 +25,7 @@
 
 	const handleSearchInput = createDebounce(((e) => {
 		search = e.currentTarget.value;
+		offset = 0;
 	}) satisfies HTMLInputAttributes['oninput']);
 
 	const setupExcludeProjectForm = () => {
@@ -106,7 +107,13 @@
 				name="platform"
 				id="platform"
 				placeholder="Select Platform"
-				bind:value={platform}
+				bind:value={
+					() => platform,
+					(value) => {
+						platform = value;
+						offset = 0;
+					}
+				}
 			>
 				<option value="">All Platforms</option>
 				{#each Object.values(ProjectPlatform) as platform (platform)}
@@ -122,7 +129,7 @@
 				Loading excluded projects...
 			</p>
 		{:else}
-			{#each projects.current?.projects as project (`project-listing-${project.full_name}-${project.platform}`)}
+			{#each projects.current?.projects as project (project.platform + project.full_name)}
 				<ul class="p-list">
 					<li class="p-list__item project-listing-item">
 						<ExcludedProjectIcon platform={project.platform} />
@@ -147,28 +154,33 @@
 			{#if projects?.current?.projects?.length === 0}
 				<p>No results found</p>
 			{/if}
-			<div class="pagination">
-				{#if offset > 0}
-					<button
-						type="button"
-						class="p-button--base has-icon"
-						onclick={() => {
-							offset -= limit;
-						}}><ChevronLeftIcon /> Previous</button
+			{#if projects.current?.total}
+				<div class="pagination">
+					{#if offset > 0}
+						<button
+							type="button"
+							class="p-button--base has-icon"
+							onclick={() => {
+								offset -= limit;
+							}}><ChevronLeftIcon /> Previous</button
+						>
+					{/if}
+					<span class="p-text--small"
+						>Page {Math.floor(offset / limit) + 1} of {Math.ceil(
+							projects.current.total / limit
+						)}</span
 					>
-				{/if}
-				<span class="p-text--small"
-					>Page {offset / limit + 1} of {Math.floor((projects.current?.total || 0) / limit)}</span
-				>
-				{#if projects.current?.total && projects.current.total > limit * (offset + 1)}
-					<button
-						class="p-button--base has-icon"
-						onclick={() => {
-							offset += limit;
-						}}>Next <ChevronRightIcon /></button
-					>
-				{/if}
-			</div>
+					{#if projects.current.total > limit + offset}
+						<button
+							type="button"
+							class="p-button--base has-icon"
+							onclick={() => {
+								offset += limit;
+							}}>Next <ChevronRightIcon /></button
+						>
+					{/if}
+				</div>
+			{/if}
 		{/if}
 	</div>
 </section>
