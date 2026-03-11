@@ -32,6 +32,15 @@
 	};
 
 	setupExcludeProjectForm();
+
+	function projectPlatformLabel(platform: ProjectPlatform) {
+		return (
+			{
+				[ProjectPlatform.github]: 'GitHub',
+				[ProjectPlatform.launchpad]: 'Launchpad'
+			}[platform] || platform
+		);
+	}
 </script>
 
 <section class="p-strip is-shallow">
@@ -45,28 +54,68 @@
 				setupExcludeProjectForm();
 			})}
 		>
-			<div class="p-form__group grid-col-6">
-				<label for="project" class="p-form__label">Project</label>
+			<div
+				class="p-form-validation grid-col-6"
+				class:is-error={excludeProject.fields.full_name.issues()}
+			>
+				<label for="project" class="p-form__label is-required">Project</label>
 				<input
 					type="text"
 					id="project"
 					placeholder="example: canonical/ubuntu.com"
 					required
+					class="p-form-validation__input"
+					aria-describedby={excludeProject.fields.full_name.issues() ? 'project-error' : undefined}
 					{...excludeProject.fields.full_name.as('text')}
 				/>
+				{#if excludeProject.fields.full_name.issues()}
+					<p class="p-form-validation__message" id="project-error">
+						{excludeProject.fields.full_name.issues()?.[0]?.message}
+					</p>
+				{/if}
 			</div>
-			<div class="p-form__group grid-col-2">
-				<label for="platform" class="p-form__label">Platform</label>
+			<div
+				class="p-form-validation grid-col-2"
+				class:is-error={excludeProject.fields.platform.issues()}
+			>
+				<label for="platform" class="p-form__label is-required">Platform</label>
 				<select
 					id="platform"
 					placeholder="Select Platform"
 					required
+					class="p-form-validation__input"
+					aria-describedby={excludeProject.fields.platform.issues() ? 'platform-error' : undefined}
 					{...excludeProject.fields.platform.as('select')}
 				>
 					{#each Object.values(ProjectPlatform) as platform (platform)}
 						<option value={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</option>
 					{/each}
 				</select>
+				{#if excludeProject.fields.platform.issues()}
+					<p class="p-form-validation__message" id="platform-error">
+						{excludeProject.fields.platform.issues()?.[0]?.message}
+					</p>
+				{/if}
+			</div>
+			<div
+				class="p-form-validation grid-col-8"
+				class:is-error={excludeProject.fields.reason.issues()}
+			>
+				<label for="reason" class="p-form__label is-required">Reason</label>
+				<textarea
+					id="reason"
+					placeholder="Explain why this project should be excluded"
+					required
+					maxlength="500"
+					class="p-form-validation__input"
+					aria-describedby={excludeProject.fields.reason.issues() ? 'reason-error' : undefined}
+					{...excludeProject.fields.reason.as('text')}
+				></textarea>
+				{#if excludeProject.fields.reason.issues()}
+					<p class="p-form-validation__message" id="reason-error">
+						{excludeProject.fields.reason.issues()?.[0]?.message}
+					</p>
+				{/if}
 			</div>
 			<div class="p-form__group">
 				<button type="submit" class="p-button--positive has-icon">
@@ -118,7 +167,7 @@
 			>
 				<option value="">All Platforms</option>
 				{#each Object.values(ProjectPlatform) as platform (platform)}
-					<option value={platform}>{platform.charAt(0).toUpperCase() + platform.slice(1)}</option>
+					<option value={platform}>{projectPlatformLabel(platform)}</option>
 				{/each}
 			</select>
 		</div>
@@ -129,59 +178,81 @@
 				<SpinnerIcon />
 				Loading excluded projects...
 			</p>
+		{:else if projects.current?.projects?.length}
+			<table aria-label="Excluded Projects" style="table-layout: fixed;">
+				<thead>
+					<tr>
+						<th style="width: 25%;">Project</th>
+						<th style="width: 20%;">Platform</th>
+						<th style="width: 40%;">Reason</th>
+						<th style="width: 15%;">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{#each projects.current?.projects as project (project.platform + project.full_name)}
+						<tr>
+							<td>
+								{project.full_name}
+							</td>
+							<td
+								><ExcludedProjectIcon
+									platform={project.platform}
+									style="vertical-align: text-top; margin-right: 0.25rem;"
+								/>
+								{projectPlatformLabel(project.platform)}</td
+							>
+							<td>{project.reason}</td>
+							<td>
+								<form
+									{...unExcludeProject
+										.for(project.platform + project.full_name)
+										.enhance(async ({ submit }) => {
+											await submit().updates(projects);
+											if (projects.current?.projects.length === 0 && offset >= limit) {
+												offset -= limit;
+											}
+										})}
+								>
+									<input {...unExcludeProject.fields.platform.as('hidden', project.platform)} />
+									<input {...unExcludeProject.fields.full_name.as('hidden', project.full_name)} />
+									<button type="submit" class="p-button--base only-icon">
+										<DeleteIcon />
+									</button>
+								</form>
+							</td>
+						</tr>
+					{/each}
+				</tbody>
+			</table>
 		{:else}
-			{#each projects.current?.projects as project (project.platform + project.full_name)}
-				<ul class="p-list">
-					<li class="p-list__item project-listing-item">
-						<ExcludedProjectIcon platform={project.platform} />
-						{project.full_name}
-						<form
-							{...unExcludeProject
-								.for(project.platform + project.full_name)
-								.enhance(async ({ submit }) => {
-									await submit();
-									projects.refresh();
-								})}
-						>
-							<input {...unExcludeProject.fields.platform.as('hidden', project.platform)} />
-							<input {...unExcludeProject.fields.full_name.as('hidden', project.full_name)} />
-							<button type="submit" class="p-button--base only-icon">
-								<DeleteIcon />
-							</button>
-						</form>
-					</li>
-				</ul>
-			{/each}
-			{#if projects?.current?.projects?.length === 0}
-				<p>No results found</p>
-			{/if}
-			{#if projects.current?.total}
-				<div class="pagination">
-					{#if offset > 0}
-						<button
-							type="button"
-							class="p-button--base has-icon"
-							onclick={() => {
-								offset -= limit;
-							}}><ChevronLeftIcon /> Previous</button
-						>
-					{/if}
-					<span class="p-text--small"
-						>Page {Math.floor(offset / limit) + 1} of {Math.ceil(
-							projects.current.total / limit
-						)}</span
+			<p>No results found</p>
+		{/if}
+		{#if projects.current?.total}
+			<div class="pagination">
+				{#if offset > 0}
+					<button
+						type="button"
+						class="p-button--base has-icon"
+						onclick={() => {
+							offset -= limit;
+						}}><ChevronLeftIcon /> Previous</button
 					>
-					{#if projects.current.total > limit + offset}
-						<button
-							type="button"
-							class="p-button--base has-icon"
-							onclick={() => {
-								offset += limit;
-							}}>Next <ChevronRightIcon /></button
-						>
-					{/if}
-				</div>
-			{/if}
+				{/if}
+				<span class="p-text--small"
+					>Page {Math.floor(offset / limit) + 1} of {Math.ceil(
+						projects.current.total / limit
+					)}</span
+				>
+				{#if projects.current.total > limit + offset}
+					<button
+						type="button"
+						class="p-button--base has-icon"
+						onclick={() => {
+							offset += limit;
+						}}>Next <ChevronRightIcon /></button
+					>
+				{/if}
+			</div>
 		{/if}
 	</div>
 </section>
@@ -192,6 +263,7 @@
 		align-items: center;
 		gap: 0.5rem;
 	}
+
 	.pagination {
 		margin: auto;
 		display: flex;
