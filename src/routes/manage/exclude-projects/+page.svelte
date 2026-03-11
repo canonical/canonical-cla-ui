@@ -14,7 +14,6 @@
 		PlusIcon,
 		SpinnerIcon
 	} from '@canonical/svelte-icons';
-	import type { HTMLInputAttributes } from 'svelte/elements';
 	const limit = 20;
 	let offset = $state(0);
 	let search = $state('');
@@ -23,10 +22,10 @@
 		getExcludedProjects({ limit, offset, query: search, platform: platform || undefined })
 	);
 
-	const handleSearchInput = createDebounce(((e) => {
-		search = e.currentTarget.value;
+	const handleSearchInput = createDebounce((value: string) => {
+		search = value;
 		offset = 0;
-	}) satisfies HTMLInputAttributes['oninput']);
+	});
 
 	const setupExcludeProjectForm = () => {
 		excludeProject.fields.platform.set(ProjectPlatform.github);
@@ -52,6 +51,7 @@
 					type="text"
 					id="project"
 					placeholder="example: canonical/ubuntu.com"
+					required
 					{...excludeProject.fields.full_name.as('text')}
 				/>
 			</div>
@@ -60,6 +60,7 @@
 				<select
 					id="platform"
 					placeholder="Select Platform"
+					required
 					{...excludeProject.fields.platform.as('select')}
 				>
 					{#each Object.values(ProjectPlatform) as platform (platform)}
@@ -90,7 +91,7 @@
 					name="search"
 					placeholder="Search by project name"
 					autocomplete="on"
-					oninput={handleSearchInput}
+					oninput={(e) => handleSearchInput(e.currentTarget.value)}
 					value={search}
 				/>
 				<button
