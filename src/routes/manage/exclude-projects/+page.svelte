@@ -1,19 +1,17 @@
 <script lang="ts">
 	import { ProjectPlatform } from '$lib/api/cla/types';
-	import { ExcludedProjectIcon } from '$lib/components';
-	import {
-		excludeProject,
-		unExcludeProject
-	} from '$lib/modules/exclude-projects/remote-functions/exclude-project.remote';
+	import { excludeProject } from '$lib/modules/exclude-projects/remote-functions/exclude-project.remote';
 	import { getExcludedProjects } from '$lib/modules/exclude-projects/remote-functions/get-excluded-projects.remote';
 	import { createDebounce } from '$lib/utils/debounce';
 	import {
 		ChevronLeftIcon,
 		ChevronRightIcon,
-		DeleteIcon,
 		PlusIcon,
 		SpinnerIcon
 	} from '@canonical/svelte-icons';
+	import ProjectsTable from './ProjectsTable.svelte';
+	import { projectPlatformLabel } from '$lib/modules/exclude-projects/utils.js';
+
 	const limit = 20;
 	let offset = $state(0);
 	let search = $state('');
@@ -32,15 +30,6 @@
 	};
 
 	setupExcludeProjectForm();
-
-	function projectPlatformLabel(platform: ProjectPlatform) {
-		return (
-			{
-				[ProjectPlatform.github]: 'GitHub',
-				[ProjectPlatform.launchpad]: 'Launchpad'
-			}[platform] || platform
-		);
-	}
 </script>
 
 <section class="p-strip is-shallow">
@@ -179,51 +168,15 @@
 				Loading excluded projects...
 			</p>
 		{:else if projects.current?.projects?.length}
-			<table aria-label="Excluded Projects" style="table-layout: fixed;">
-				<thead>
-					<tr>
-						<th style="width: 25%;">Project</th>
-						<th style="width: 20%;">Platform</th>
-						<th style="width: 40%;">Reason</th>
-						<th style="width: 15%;">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each projects.current?.projects as project (project.platform + project.full_name)}
-						<tr>
-							<td>
-								{project.full_name}
-							</td>
-							<td
-								><ExcludedProjectIcon
-									platform={project.platform}
-									style="vertical-align: text-top; margin-right: 0.25rem;"
-								/>
-								{projectPlatformLabel(project.platform)}</td
-							>
-							<td>{project.reason}</td>
-							<td>
-								<form
-									{...unExcludeProject
-										.for(project.platform + project.full_name)
-										.enhance(async ({ submit }) => {
-											await submit().updates(projects);
-											if (projects.current?.projects.length === 0 && offset >= limit) {
-												offset -= limit;
-											}
-										})}
-								>
-									<input {...unExcludeProject.fields.platform.as('hidden', project.platform)} />
-									<input {...unExcludeProject.fields.full_name.as('hidden', project.full_name)} />
-									<button type="submit" class="p-button--base only-icon">
-										<DeleteIcon />
-									</button>
-								</form>
-							</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
+			<ProjectsTable
+				projects={projects.current?.projects}
+				projectsRemoteQuery={projects}
+				onUnExcludeProject={() => {
+					if (projects.current?.projects.length === 0 && offset >= limit) {
+						offset -= limit;
+					}
+				}}
+			/>
 		{:else}
 			<p>No results found</p>
 		{/if}

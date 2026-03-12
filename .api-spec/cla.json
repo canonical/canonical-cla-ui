@@ -954,6 +954,8 @@
 					},
 					"full_name": {
 						"type": "string",
+						"maxLength": 200,
+						"minLength": 1,
 						"title": "Full Name",
 						"description": "The full name of the project, this includes the organization name and the project name.",
 						"examples": ["canonical/ubuntu.com"]
@@ -961,6 +963,7 @@
 					"reason": {
 						"type": "string",
 						"maxLength": 500,
+						"minLength": 1,
 						"title": "Reason",
 						"description": "The reason why the project is excluded from CLA checks"
 					}
@@ -977,6 +980,8 @@
 					},
 					"full_name": {
 						"type": "string",
+						"maxLength": 200,
+						"minLength": 1,
 						"title": "Full Name",
 						"description": "The full name of the project, this includes the organization name and the project name.",
 						"examples": ["canonical/ubuntu.com"]
@@ -1007,6 +1012,8 @@
 					},
 					"full_name": {
 						"type": "string",
+						"maxLength": 200,
+						"minLength": 1,
 						"title": "Full Name",
 						"description": "The full name of the project, this includes the organization name and the project name.",
 						"examples": ["canonical/ubuntu.com"]
@@ -1014,6 +1021,7 @@
 					"reason": {
 						"type": "string",
 						"maxLength": 500,
+						"minLength": 1,
 						"title": "Reason",
 						"description": "The reason why the project is excluded from CLA checks"
 					}
