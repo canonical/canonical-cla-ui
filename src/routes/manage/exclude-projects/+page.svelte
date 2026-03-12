@@ -9,8 +9,9 @@
 		PlusIcon,
 		SpinnerIcon
 	} from '@canonical/svelte-icons';
-	import ProjectsTable from './ProjectsTable.svelte';
+	import { ProjectsTable } from '$lib/modules/exclude-projects/index.js';
 	import { projectPlatformLabel } from '$lib/modules/exclude-projects/utils.js';
+	import { Spinner } from '$lib/components/index.js';
 
 	const limit = 20;
 	let offset = $state(0);
@@ -107,8 +108,12 @@
 				{/if}
 			</div>
 			<div class="p-form__group">
-				<button type="submit" class="p-button--positive has-icon">
-					<PlusIcon />
+				<button type="submit" class="p-button--positive" disabled={!!excludeProject.pending}>
+					{#if excludeProject.pending}
+						<Spinner />
+					{:else}
+						<PlusIcon />
+					{/if}
 					Add
 				</button>
 			</div>
