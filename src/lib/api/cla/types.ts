@@ -532,7 +532,7 @@ export interface components {
 		};
 		/** ExcludedProjectsResponse */
 		ExcludedProjectsResponse: {
-			project: components['schemas']['ExcludedProjectPayload'];
+			project: components['schemas']['ExcludedProjectIdentifier'];
 			/** Excluded */
 			excluded: boolean;
 		};
