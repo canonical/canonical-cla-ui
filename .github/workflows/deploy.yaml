@@ -32,7 +32,7 @@ on:
 #  VAULT_APPROLE_SECRET_ID (uuid)
 
 env:
-  DEPLOYMENT_ENV: ${{ github.event.inputs.environment || 'Production' }}
+  DEPLOYMENT_ENV: ${{ github.event.inputs.environment || 'Staging' }}
   CHARM_BUILD_NAME: ${{ github.event.repository.name }}-${{ github.sha }}.charm
   ROCK_BUILD_NAME: ${{ github.event.repository.name }}-${{ github.sha }}.rock
 
