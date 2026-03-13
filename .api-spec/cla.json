@@ -221,7 +221,7 @@
 							"maxItems": 100,
 							"title": "Projects",
 							"description": "A list of projects to check for CLA signatories",
-							"examples": ["github@canonical/ubuntu.com,launchpad@canonical/snapd"],
+							"examples": ["canonical/ubuntu.com@github,canonical/snapd@launchpad"],
 							"default": []
 						},
 						"description": "A list of projects to check for CLA signatories"
@@ -367,7 +367,7 @@
 					"required": true,
 					"content": {
 						"application/json": {
-							"schema": { "$ref": "#/components/schemas/ExcludedProjectPayload" }
+							"schema": { "$ref": "#/components/schemas/ExcludedProjectIdentifier" }
 						}
 					}
 				},
@@ -772,9 +772,10 @@
 						"in": "query",
 						"required": false,
 						"schema": {
-							"anyOf": [{ "type": "string" }, { "type": "null" }],
+							"type": "string",
 							"description": "The redirect URI to redirect to after login.",
 							"examples": ["/dashboard"],
+							"default": "/oidc/profile",
 							"title": "Redirect Uri"
 						},
 						"description": "The redirect URI to redirect to after login."
@@ -953,6 +954,34 @@
 					},
 					"full_name": {
 						"type": "string",
+						"maxLength": 200,
+						"minLength": 1,
+						"title": "Full Name",
+						"description": "The full name of the project, this includes the organization name and the project name.",
+						"examples": ["canonical/ubuntu.com"]
+					},
+					"reason": {
+						"type": "string",
+						"maxLength": 500,
+						"minLength": 1,
+						"title": "Reason",
+						"description": "The reason why the project is excluded from CLA checks"
+					}
+				},
+				"type": "object",
+				"required": ["platform", "full_name", "reason"],
+				"title": "ExcludedProjectCreatePayload"
+			},
+			"ExcludedProjectIdentifier": {
+				"properties": {
+					"platform": {
+						"allOf": [{ "$ref": "#/components/schemas/ProjectPlatform" }],
+						"description": "The platform of the project"
+					},
+					"full_name": {
+						"type": "string",
+						"maxLength": 200,
+						"minLength": 1,
 						"title": "Full Name",
 						"description": "The full name of the project, this includes the organization name and the project name.",
 						"examples": ["canonical/ubuntu.com"]
@@ -960,7 +989,7 @@
 				},
 				"type": "object",
 				"required": ["platform", "full_name"],
-				"title": "ExcludedProjectCreatePayload"
+				"title": "ExcludedProjectIdentifier"
 			},
 			"ExcludedProjectListingPayload": {
 				"properties": {
@@ -983,18 +1012,27 @@
 					},
 					"full_name": {
 						"type": "string",
+						"maxLength": 200,
+						"minLength": 1,
 						"title": "Full Name",
 						"description": "The full name of the project, this includes the organization name and the project name.",
 						"examples": ["canonical/ubuntu.com"]
+					},
+					"reason": {
+						"type": "string",
+						"maxLength": 500,
+						"minLength": 1,
+						"title": "Reason",
+						"description": "The reason why the project is excluded from CLA checks"
 					}
 				},
 				"type": "object",
-				"required": ["platform", "full_name"],
+				"required": ["platform", "full_name", "reason"],
 				"title": "ExcludedProjectPayload"
 			},
 			"ExcludedProjectsResponse": {
 				"properties": {
-					"project": { "$ref": "#/components/schemas/ExcludedProjectPayload" },
+					"project": { "$ref": "#/components/schemas/ExcludedProjectIdentifier" },
 					"excluded": { "type": "boolean", "title": "Excluded" }
 				},
 				"type": "object",

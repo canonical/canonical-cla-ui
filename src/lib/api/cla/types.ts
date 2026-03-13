@@ -490,6 +490,22 @@ export interface components {
 			 * @example canonical/ubuntu.com
 			 */
 			full_name: string;
+			/**
+			 * Reason
+			 * @description The reason why the project is excluded from CLA checks
+			 */
+			reason: string;
+		};
+		/** ExcludedProjectIdentifier */
+		ExcludedProjectIdentifier: {
+			/** @description The platform of the project */
+			platform: components['schemas']['ProjectPlatform'];
+			/**
+			 * Full Name
+			 * @description The full name of the project, this includes the organization name and the project name.
+			 * @example canonical/ubuntu.com
+			 */
+			full_name: string;
 		};
 		/** ExcludedProjectListingPayload */
 		ExcludedProjectListingPayload: {
@@ -508,10 +524,15 @@ export interface components {
 			 * @example canonical/ubuntu.com
 			 */
 			full_name: string;
+			/**
+			 * Reason
+			 * @description The reason why the project is excluded from CLA checks
+			 */
+			reason: string;
 		};
 		/** ExcludedProjectsResponse */
 		ExcludedProjectsResponse: {
-			project: components['schemas']['ExcludedProjectPayload'];
+			project: components['schemas']['ExcludedProjectIdentifier'];
 			/** Excluded */
 			excluded: boolean;
 		};
@@ -749,6 +770,7 @@ export interface components {
 export type ClaCheckResponse = components['schemas']['CLACheckResponse'];
 export type ErrorResponse = components['schemas']['ErrorResponse'];
 export type ExcludedProjectCreatePayload = components['schemas']['ExcludedProjectCreatePayload'];
+export type ExcludedProjectIdentifier = components['schemas']['ExcludedProjectIdentifier'];
 export type ExcludedProjectListingPayload = components['schemas']['ExcludedProjectListingPayload'];
 export type ExcludedProjectPayload = components['schemas']['ExcludedProjectPayload'];
 export type ExcludedProjectsResponse = components['schemas']['ExcludedProjectsResponse'];
@@ -1010,7 +1032,7 @@ export interface operations {
 		};
 		requestBody: {
 			content: {
-				'application/json': components['schemas']['ExcludedProjectPayload'];
+				'application/json': components['schemas']['ExcludedProjectIdentifier'];
 			};
 		};
 		responses: {
@@ -1363,7 +1385,7 @@ export interface operations {
 		parameters: {
 			query?: {
 				/** @description The redirect URI to redirect to after login. */
-				redirect_uri?: string | null;
+				redirect_uri?: string;
 			};
 			header?: never;
 			path?: never;

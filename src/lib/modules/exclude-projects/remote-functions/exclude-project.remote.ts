@@ -2,9 +2,9 @@ import { form, getRequestEvent } from '$app/server';
 import { env } from '$env/dynamic/private';
 import { claApi, extractErrorMessage } from '$lib/api';
 import { error } from '@sveltejs/kit';
-import { excludeProjectSchema } from './schema';
+import { excludeProjectCreateSchema, excludeProjectDeleteSchema } from './schema';
 
-export const excludeProject = form(excludeProjectSchema, async (project) => {
+export const excludeProject = form(excludeProjectCreateSchema, async (project) => {
 	const { fetch } = getRequestEvent();
 	const response = await claApi.POST('/cla/exclude-project', {
 		fetch,
@@ -21,7 +21,7 @@ export const excludeProject = form(excludeProjectSchema, async (project) => {
 	return response.data;
 });
 
-export const unExcludeProject = form(excludeProjectSchema, async (project) => {
+export const unExcludeProject = form(excludeProjectDeleteSchema, async (project) => {
 	const { fetch } = getRequestEvent();
 	const response = await claApi.DELETE('/cla/excluded-project', {
 		fetch,

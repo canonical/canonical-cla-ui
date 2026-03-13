@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { IconBase } from '@canonical/svelte-icons';
-	let { class: className = '' }: { class?: string } = $props();
+	let { class: className = '', style }: { class?: string; style?: string } = $props();
 </script>
 
-<IconBase iconName="launchpad" class={className}>
+<IconBase iconName="launchpad" class={className} {style}>
 	<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" viewBox="0 0 16 16">
 		<rect width="16" fill="#e95420" height="16" />
 		<path

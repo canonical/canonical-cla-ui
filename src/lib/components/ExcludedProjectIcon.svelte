@@ -3,11 +3,11 @@
 	import { GithubIcon } from '@canonical/svelte-icons';
 	import { ProjectPlatform } from '$lib/api/cla/types';
 
-	const { platform }: { platform: ProjectPlatform } = $props();
+	const { platform, style }: { platform: ProjectPlatform; style?: string } = $props();
 </script>
 
 {#if platform === 'github'}
-	<GithubIcon />
+	<GithubIcon {style} />
 {:else if platform === 'launchpad'}
-	<LaunchpadIcon />
+	<LaunchpadIcon {style} />
 {/if}
